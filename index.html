@@ -921,7 +921,7 @@
                         body: formData,
                     });
 
-                    if (response.ok) {
+                    if (response.status >= 200 && response.status < 400) {
                         showStatus('success', '✅ Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
                         form.reset();
                     } else {
