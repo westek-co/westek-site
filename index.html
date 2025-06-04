@@ -880,7 +880,7 @@
             const buttonText = document.getElementById('buttonText');
             const formStatus = document.getElementById('formStatus');
 
-            // Show status message
+            // Show Status Message
             function showStatus(type, message) {
                 formStatus.className = `form-status ${type}`;
                 formStatus.innerHTML = message;
@@ -894,7 +894,7 @@
                 }
             }
 
-            // Set loading state
+            // Set Loading State
             function setLoading(isLoading) {
                 submitButton.disabled = isLoading;
                 if (isLoading) {
@@ -904,15 +904,15 @@
                     buttonText.textContent = 'Send Message';
                 }
             }
-/*
-            // Handle form submission
+
+            // Handle Form Submission
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 try {
                     setLoading(true);
                     
-                    // Create FormData object
+                    // Create FormData Object
                     const formData = new FormData(form);
                     
                     // Submit to Formspark
@@ -938,8 +938,8 @@
                     setLoading(false);
                 }
             });
-*/
-            // Listen for Botpoison events (optional)
+
+            // Listen for Botpoison Events [Optional]
             form.addEventListener('botpoison:challenge', function() {
                 console.log('Botpoison challenge started');
             });
