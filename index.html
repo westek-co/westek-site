@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wes Tek</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #4a90e2;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4a90e2;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .tagline-container {
+            position: relative;
+            height: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            transition: opacity 0.5s ease;
+        }
+
+        .tagline.active {
+            opacity: 1;
+        }
+
+        .tagline-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .tagline-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .cta-button:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .developer-photo {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .developer-photo img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .developer-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .developer-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #4a90e2;
+        }
+
+        .developer-info h4 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Apps Section */
+        .apps {
+            background: #fff;
+        }
+
+        .apps-showcase {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .iphone-frame {
+            position: relative;
+            width: 100%;
+            padding-top: 200%;
+            background: #1a1a1a;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .iphone-screen {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 5%;
+            background: #000;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .app-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .app-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .app-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            height: 100%;
+            gap: 2px;
+            background: #000;
+        }
+
+        .screenshot {
+            background: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+
+        .app-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+
+        .app-nav button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+        }
+
+        .app-nav button:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
+        }
+
+        .app-info {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .app-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #4a90e2;
+        }
+
+        /* News Section */
+        .news {
+            background: #f8f9fa;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #333;
+            color: white;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-button:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #4a90e2;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .app-nav {
+                padding: 0 0.5rem;
+            }
+
+            .app-nav button {
+                font-size: 1.5rem;
+                padding: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">Wes Tek</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <video class="video-background" autoplay muted loop>
+            <source src="placeholder-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <button class="tagline-toggle" onclick="toggleTagline()">Tagline: ON</button>
+        <div class="hero-content">
+            <h1>Wes Tek</h1>
+            <div class="tagline-container">
+                <p class="tagline active" data-text="The Wastelander">The Wastelander</p>
+                <p class="tagline" data-text="TradeRoute 76">TradeRoute 76</p>
+                <p class="tagline" data-text="... more apps coming soon!">... more apps coming soon!</p>
+            </div>
+            <a href="#apps" class="cta-button">Explore Our Apps</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About the Developer</h2>
+            <div class="about-content">
+                <div class="developer-photo">
+                    <img src="placeholder-photo.jpg" alt="Developer Photo">
+                </div>
+                <div class="developer-info">
+                    <h3>Wesley Synnott</h3>
+                    <h4>Developer</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps" class="apps">
+        <div class="container">
+            <h2>Our Apps</h2>
+            <div class="apps-showcase">
+                <div class="iphone-frame">
+                    <div class="iphone-screen">
+                        <div class="app-container">
+                            <div class="app-slides" id="appSlides">
+                                <!-- App 1: The Wastelander -->
+                                <div class="app-slide">
+                                    <div class="screenshot-grid">
+                                        <div class="screenshot">Screenshot 1-1</div>
+                                        <div class="screenshot">Screenshot 1-2</div>
+                                        <div class="screenshot">Screenshot 1-3</div>
+                                        <div class="screenshot">Screenshot 1-4</div>
+                                        <div class="screenshot">Screenshot 1-5</div>
+                                        <div class="screenshot">Screenshot 1-6</div>
+                                    </div>
+                                </div>
+                                <!-- App 2: TradeRoute 76 -->
+                                <div class="app-slide">
+                                    <div class="screenshot-grid">
+                                        <div class="screenshot">Screenshot 2-1</div>
+                                        <div class="screenshot">Screenshot 2-2</div>
+                                        <div class="screenshot">Screenshot 2-3</div>
+                                        <div class="screenshot">Screenshot 2-4</div>
+                                        <div class="screenshot">Screenshot 2-5</div>
+                                        <div class="screenshot">Screenshot 2-6</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-nav">
+                    <button onclick="changeApp(-1)">‹</button>
+                    <button onclick="changeApp(1)">›</button>
+                </div>
+                <div class="app-info">
+                    <h3 id="appName">The Wastelander</h3>
+                    <p id="appDescription">Experience the ultimate post-apocalyptic companion app</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="news">
+        <div class="container">
+            <h2>Latest News</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">News Image 1</div>
+                    <div class="news-content">
+                        <p class="news-date">December 1, 2025</p>
+                        <h3 class="news-title">The Wastelander is Released</h3>
+                        <p><b>The Wastelander<b> is now live on the App Store, offering Fallout 76 players a comprehensive companion with built-in checklists, maps, guides, and more! From browsing the latest Atomic Shop items to tracking seasonal S.C.O.R.E. progress, this release brings months of community feedback to life in a polished, offline-capable package.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">News Image 2</div>
+                    <div class="news-content">
+                        <p class="news-date">August 1, 2025</p>
+                        <h3 class="news-title">The Wastelander opens to Beta Testers</h3>
+                        <p>We’ve invited a select group of Fallout 76 fans to explore <b>The Wastelander<b>’s launch features, including the Atomic Shop database and Community Event Calendar. Beta testers are providing invaluable feedback on build infographics and checklist synchronization before our public launch this winter. If you’re interested in joining the beta, then please <a href="mailto:support@westek.com?subject=Beta%20Tester%20Application&body=Name:%20%0AEmail:%20%0AiOS%20Device:%20%0AiOS%20Version:%20%0AMessage:%20">send us an email</a>.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">News Image 3</div>
+                    <div class="news-content">
+                        <p class="news-date">June 1, 2025</p>
+                        <h3 class="news-title">Announcing our First Project</h3>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="mailto:support@westek.co" onclick="openSupportEmail(event)">Support</a>
+            </div>
+            <p>&copy; 2025 Wes Tek. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamic Tagline Rotation
+        let taglineRotationEnabled = true;
+        let currentTaglineIndex = 0;
+        const taglines = document.querySelectorAll('.tagline');
+        let taglineInterval;
+
+        /**
+         * Rotates through taglines every 3 seconds
+         * Shows one tagline at a time with fade transition
+         */
+        function rotateTaglines() {
+            if (!taglineRotationEnabled) return;
+            
+            // Hide current tagline
+            taglines[currentTaglineIndex].classList.remove('active');
+            
+            // Move to next tagline
+            currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+            
+            // Show next tagline
+            taglines[currentTaglineIndex].classList.add('active');
+        }
+
+        /**
+         * Toggles the tagline rotation on/off
+         * When off, displays "The Wastelander" as default
+         */
+        function toggleTagline() {
+            taglineRotationEnabled = !taglineRotationEnabled;
+            const toggleButton = document.querySelector('.tagline-toggle');
+            toggleButton.textContent = `Tagline: ${taglineRotationEnabled ? 'ON' : 'OFF'}`;
+            
+            if (!taglineRotationEnabled) {
+                // Stop rotation and show default tagline
+                clearInterval(taglineInterval);
+                taglines.forEach(tagline => tagline.classList.remove('active'));
+                taglines[0].classList.add('active'); // Show "The Wastelander"
+                currentTaglineIndex = 0;
+            } else {
+                // Resume rotation
+                startTaglineRotation();
+            }
+        }
+
+        /**
+         * Starts the tagline rotation interval
+         */
+        function startTaglineRotation() {
+            taglineInterval = setInterval(rotateTaglines, 3000);
+        }
+
+        // Initialize tagline rotation
+        startTaglineRotation();
+
+        // App Slider
+        let currentApp = 0;
+        const appSlides = document.getElementById('appSlides');
+        const appNames = ['The Wastelander', 'TradeRoute 76'];
+        const appDescriptions = [
+            'Experience the ultimate post-apocalyptic companion app',
+            'Master the wasteland economy with real-time trading'
+        ];
+
+        /**
+         * Changes the displayed app in the iPhone frame
+         * @param {number} direction - 1 for next, -1 for previous
+         */
+        function changeApp(direction) {
+            currentApp = (currentApp + direction + appNames.length) % appNames.length;
+            appSlides.style.transform = `translateX(-${currentApp * 100}%)`;
+            
+            // Update app info
+            document.getElementById('appName').textContent = appNames[currentApp];
+            document.getElementById('appDescription').textContent = appDescriptions[currentApp];
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Here you would typically send the form data to a server
+            console.log('Form submitted:', { name, email, message });
+            alert('Thank you for your message! We\'ll get back to you soon.');
+            event.target.reset();
+        }
+
+        // Support email handler
+        function openSupportEmail(event) {
+            event.preventDefault();
+            const subject = encodeURIComponent('Support Request');
+            const body = encodeURIComponent('Please describe your issue:\n\n\nContact Information:\nName: \nEmail: \n');
+            window.location.href = `mailto:support@westek.co?subject=${subject}&body=${body}`;
+        }
+
+        // Scroll animations
+        function handleScroll() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(20, 20, 20, 0.98)';
+                nav.style.padding = '0.5rem 0';
+            } else {
+                nav.style.background = 'rgba(20, 20, 20, 0.95)';
+                nav.style.padding = '1rem 0';
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial states
+            handleScroll();
+        });
+    </script>
+</body>
+</html>
