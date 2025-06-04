@@ -466,10 +466,60 @@
             margin: 0 auto;
         }
 
-        .submit-button:hover {
+        .submit-button:hover:not(:disabled) {
             background: #357abd;
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+        }
+
+        .submit-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Status messages */
+        .form-status {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #4caf50;
+        }
+
+        .form-status.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+
+        .form-status.loading {
+            background: rgba(74, 144, 226, 0.2);
+            border: 1px solid #4a90e2;
+            color: #4a90e2;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Footer */
@@ -539,6 +589,10 @@
             }
         }
     </style>
+
+    <!-- Botpoison Script -->
+    <script src="https://unpkg.com/@botpoison/browser" async></script>
+
 </head>
 <body>
     <!-- Navigation -->
@@ -657,7 +711,7 @@
                     <div class="news-content">
                         <p class="news-date">August 1, 2025</p>
                         <h3 class="news-title">The Wastelander opens to Beta Testers</h3>
-                        <p>We’ve invited a select group of Fallout 76 fans to explore <b>The Wastelander<b>’s launch features, including the Atomic Shop database and Community Event Calendar. Beta testers are providing invaluable feedback on build infographics and checklist synchronization before our public launch this winter. If you’re interested in joining the beta, then please <a href="mailto:support@westek.com?subject=Beta%20Tester%20Application&body=Name:%20%0AEmail:%20%0AiOS%20Device:%20%0AiOS%20Version:%20%0AMessage:%20">send us an email</a>.</p>
+                        <p>We've invited a select group of Fallout 76 fans to explore <b>The Wastelander<b>'s launch features, including the Atomic Shop database and Community Event Calendar. Beta testers are providing invaluable feedback on build infographics and checklist synchronization before our public launch this winter. If you're interested in joining the beta, then please <a href="mailto:support@westek.com?subject=Beta%20Tester%20Application&body=Name:%20%0AEmail:%20%0AiOS%20Device:%20%0AiOS%20Version:%20%0AMessage:%20">send us an email</a>.</p>
                     </div>
                 </div> -->
                 <div class="news-card">
@@ -676,20 +730,43 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2>Contact Us</h2>
-            <form class="contact-form" onsubmit="handleSubmit(event)">
+            
+            <!-- Status Message -->
+            <div id="formStatus" class="form-status"></div>
+            
+            <!-- Enhanced Form with Formspark and Botpoison -->
+            <form
+                id="contactForm"
+                class="contact-form" 
+                action="https://submit-form.com/YOUR-FORM-ID" 
+                method="POST"
+                data-botpoison-public-key="YOUR-BOTPOISON-PUBLIC-KEY"
+            >
+                <!-- Honeypot Field for Additional Spam Protection -->
+                <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+                
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required placeholder="Your Name">
                 </div>
+                
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required placeholder="your@email.com">
                 </div>
+                
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
                 </div>
-                <button type="submit" class="submit-button">Send Message</button>
+                
+                <!-- Hidden Fields for Additional Context -->
+                <input type="hidden" name="_subject" value="New Contact Form Submission from Wes Tek Website">
+                <input type="hidden" name="_website" value="westek.com">
+                
+                <button type="submit" id="submitButton" class="submit-button">
+                    <span id="buttonText">Send Message</span>
+                </button>
             </form>
         </div>
     </section>
@@ -796,29 +873,131 @@
             });
         });
 
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Here you would typically send the form data to a server
-            console.log('Form submitted:', { name, email, message });
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            event.target.reset();
-        }
+        // Enhanced form submission with Botpoison integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const formStatus = document.getElementById('formStatus');
 
-        // Support email handler
+            // Show status message
+            function showStatus(type, message) {
+                formStatus.className = `form-status ${type}`;
+                formStatus.innerHTML = message;
+                formStatus.style.display = 'block';
+                
+                // Auto-hide success/error messages after 5 seconds
+                if (type !== 'loading') {
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                    }, 5000);
+                }
+            }
+
+            // Set loading state
+            function setLoading(isLoading) {
+                submitButton.disabled = isLoading;
+                if (isLoading) {
+                    buttonText.innerHTML = '<span class="loading-spinner"></span>Sending...';
+                    showStatus('loading', 'Processing your message...');
+                } else {
+                    buttonText.textContent = 'Send Message';
+                }
+            }
+
+            // Handle form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                try {
+                    setLoading(true);
+                    
+                    // Create FormData object
+                    const formData = new FormData(form);
+                    
+                    // Submit to Formspark
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        showStatus('success', '✅ Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
+                        form.reset();
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showStatus('error', '❌ Sorry, there was an error sending your message. Please try again or contact us directly at support@westek.co');
+                } finally {
+                    setLoading(false);
+                }
+            });
+
+            // Listen for Botpoison events (optional)
+            form.addEventListener('botpoison:challenge', function() {
+                console.log('Botpoison challenge started');
+            });
+
+            form.addEventListener('botpoison:solved', function() {
+                console.log('Botpoison challenge solved');
+            });
+
+            form.addEventListener('botpoison:error', function(e) {
+                console.error('Botpoison error:', e.detail);
+                showStatus('error', '❌ Security verification failed. Please refresh the page and try again.');
+            });
+        });
+
+        // Support Email Handler
         function openSupportEmail(event) {
             event.preventDefault();
             const subject = encodeURIComponent('Support Request');
-            const body = encodeURIComponent('Please describe your issue:\n\n\nContact Information:\nName: \nEmail: \n');
+            const body = encodeURIComponent(
+                'Please provide the following information to help us assist you:\n\n' +
+                'CONTACT INFORMATION:\n' +
+                'Full Name: \n' +
+                'Email Address: \n\n' +
+                
+                'APP DETAILS:\n' +
+                'App Name: \n' +
+                'App Version: \n' +
+                'Purchase/Download Date: \n\n' +
+                
+                'DEVICE INFORMATION:\n' +
+                'Device Model: (e.g., iPhone 14 Pro, iPad Air)\n' +
+                'iOS Version: (e.g., 17.2.1)\n' +
+                'Available Storage Space: \n\n' +
+                
+                'ISSUE DETAILS:\n' +
+                'Issue Type: (Bug Report / Feature Request / General Question / Account Issue)\n' +
+                'Brief Description: \n' +
+                'Steps to Reproduce: \n' +
+                'Expected Behavior: \n' +
+                'Actual Behavior: \n\n' +
+                
+                'ADDITIONAL CONTEXT:\n' +
+                'Screenshots/Videos: (Please attach if applicable)\n' +
+                'Error Messages: \n' +
+                'When did this start happening: \n' +
+                'Have you tried restarting the app: (Yes/No)\n' +
+                'Have you tried restarting your device: (Yes/No)\n\n' +
+                
+                'OTHER:\n' +
+                'Additional Comments: \n\n' +
+                
+                'Thank you for helping us improve our apps!'
+            );
+            
             window.location.href = `mailto:support@westek.co?subject=${subject}&body=${body}`;
         }
 
-        // Scroll animations
+        // Scroll Animations
         function handleScroll() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
@@ -834,7 +1013,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Set initial states
+            // Set Initial States
             handleScroll();
         });
     </script>
