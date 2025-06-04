@@ -451,6 +451,65 @@
             resize: vertical;
             min-height: 150px;
         }
+ 
+        /* Form Section Headers */
+        .form-fields h3 {
+            color: #4a90e2;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-fields h3:first-child {
+            margin-top: 1rem;
+        }
+
+        /* Required Field Indicator */
+        .required {
+            color: #ff6b6b;
+            margin-left: 0.2rem;
+        }
+
+        /* Select Dropdown Styling */
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        select option {
+            background: #333;
+            color: white;
+        }
+
+        select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Date Input Styling */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        /* Improved Textarea Styling */
+        textarea {
+            font-family: inherit;
+            line-height: 1.5;
+        }
 
         .submit-button {
             background: #4a90e2;
@@ -478,7 +537,55 @@
             transform: none;
         }
 
-        /* Status messages */
+        /* Field Validation Styling */
+        input:invalid:not(:focus):not(:placeholder-shown),
+        textarea:invalid:not(:focus):not(:placeholder-shown),
+        select:invalid:not(:focus) {
+            border: 1px solid #ff6b6b;
+        }
+
+        input:valid:not(:focus):not(:placeholder-shown),
+        textarea:valid:not(:focus):not(:placeholder-shown),
+        select:valid:not(:focus) {
+            border: 1px solid #51cf66;
+        }
+
+        /* Disabled Field Styling */
+        input:disabled,
+        textarea:disabled,
+        select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Form Fransition Animations */
+        .form-fields {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .form-fields h3 {
+                font-size: 1rem;
+            }
+            
+            input, textarea, select {
+                font-size: 16px; /* Prevents Zoom on iOS */
+            }
+        }
+
+        /* Status Messages */
         .form-status {
             padding: 1rem;
             border-radius: 5px;
@@ -505,7 +612,7 @@
             color: #4a90e2;
         }
 
-        /* Loading spinner */
+        /* Loading Spinner */
         .loading-spinner {
             width: 20px;
             height: 20px;
@@ -639,8 +746,7 @@
                 <div class="developer-info">
                     <h3>Wesley Synnott</h3>
                     <h4>Developer</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>A Canadian iOS developer passionate about creating intuitive mobile experiences, he combines technical precision with user-centred design to build tools that enhance digital interaction. Currently developing his debut app, The Wastelander, he brings fresh perspective to mobile development through careful attention to functionality and user experience.</p>
                 </div>
             </div>
         </div>
@@ -667,7 +773,7 @@
                                     </div>
                                 </div>
                                 <!-- App 2: TradeRoute 76 -->
-                                <div class="app-slide">
+                                <!--<div class="app-slide">
                                     <div class="screenshot-grid">
                                         <div class="screenshot">Screenshot 2-1</div>
                                         <div class="screenshot">Screenshot 2-2</div>
@@ -676,7 +782,7 @@
                                         <div class="screenshot">Screenshot 2-5</div>
                                         <div class="screenshot">Screenshot 2-6</div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -687,7 +793,7 @@
                 </div>
                 <div class="app-info">
                     <h3 id="appName">The Wastelander</h3>
-                    <p id="appDescription">Experience the ultimate post-apocalyptic companion app</p>
+                    <p id="appDescription">Experience the ultimate post-apocalyptic companion app!</p>
                 </div>
             </div>
         </div>
@@ -744,26 +850,212 @@
                 <!-- Honeypot Field for Additional Spam Protection -->
                 <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
                 
+                <!-- Form Type Selection -->
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                    <label for="formType">What can we help you with?</label>
+                    <select id="formType" name="formType" required>
+                        <option value="">Select an option...</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="incorrect">Incorrect Information Report</option>
+                        <option value="question">Question</option>
+                        <option value="suggestion">Suggestion</option>
+                    </select>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="your@email.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+                <!-- Dynamic Form Fields Container -->
+                <div id="dynamicFields" style="display: none;">
+                    <!-- Bug Report Fields -->
+                    <div id="bugFields" class="form-fields" style="display: none;">
+                        <h3>CONTACT INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="bug_fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="bug_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="bug_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                        </div>
+                        
+                        <h3>APP DETAILS</h3>
+                        <div class="form-group">
+                            <label for="bug_appName">App Name <span class="required">*</span></label>
+                            <input type="text" id="bug_appName" name="appName" placeholder="The Wastelander" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_appVersion">App Version</label>
+                            <input type="text" id="bug_appVersion" name="appVersion" placeholder="1.2.3" pattern="[0-9]+(\.[0-9]+)*" title="Please enter a valid version number (e.g., 1.2.3)">
+                        </div>
+                        
+                        <h3>DEVICE INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="bug_deviceModel">Device Model</label>
+                            <input type="text" id="bug_deviceModel" name="deviceModel" placeholder="iPhone 14 Pro, iPad Air, etc" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_iosVersion">iOS Version</label>
+                            <input type="text" id="bug_iosVersion" name="iosVersion" placeholder="17.2.1, 18.5, etc" pattern="[0-9]+(\.[0-9]+)*" title="Please enter a valid iOS version (e.g., 17.2.1)">
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_storageSpace">Storage Space</label>
+                            <input type="text" id="bug_storageSpace" name="storageSpace" placeholder="122.22 GB / 1.02 TB" maxlength="50">
+                        </div>
+                        
+                        <h3>ISSUE DETAILS</h3>
+                        <div class="form-group">
+                            <label for="bug_briefDescription">Brief Description <span class="required">*</span></label>
+                            <textarea id="bug_briefDescription" name="briefDescription" rows="3" maxlength="500"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_stepsToReproduce">Steps to Reproduce</label>
+                            <textarea id="bug_stepsToReproduce" name="stepsToReproduce" rows="4" placeholder="1. Open the app&#10;2. Navigate to...&#10;3. Click on...&#10;4. The bug appears" maxlength="1000"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_expectedBehavior">Expected Behavior</label>
+                            <textarea id="bug_expectedBehavior" name="expectedBehavior" rows="2" maxlength="500"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_actualBehavior">Actual Behavior</label>
+                            <textarea id="bug_actualBehavior" name="actualBehavior" rows="2" maxlength="500"></textarea>
+                        </div>
+                        
+                        <h3>ADDITIONAL CONTEXT</h3>
+                        <div class="form-group">
+                            <label for="bug_screenshots">Screenshots/Videos</label>
+                            <input type="text" id="bug_screenshots" name="screenshots" placeholder="Attach if applicable (describe or provide links)" maxlength="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_errorMessages">Error Messages</label>
+                            <textarea id="bug_errorMessages" name="errorMessages" rows="2" maxlength="500"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_startDate">Start Date</label>
+                            <input type="date" id="bug_startDate" name="startDate" max="9999-12-31">
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_restartedApp">Restarted the App</label>
+                            <select id="bug_restartedApp" name="restartedApp">
+                                <option value="">Select...</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bug_restartedDevice">Restarted the Device</label>
+                            <select id="bug_restartedDevice" name="restartedDevice">
+                                <option value="">Select...</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        
+                        <h3>OTHER</h3>
+                        <div class="form-group">
+                            <label for="bug_additionalComments">Additional Comments</label>
+                            <textarea id="bug_additionalComments" name="additionalComments" rows="3" maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Feedback Fields -->
+                    <div id="feedbackFields" class="form-fields" style="display: none;">
+                        <h3>CONTACT INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="feedback_fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="feedback_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="feedback_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                        </div>
+                        
+                        <h3>FEEDBACK DETAILS</h3>
+                        <div class="form-group">
+                            <label for="feedback_briefDescription">Brief Description <span class="required">*</span></label>
+                            <textarea id="feedback_briefDescription" name="briefDescription" rows="5" maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Incorrect Information Report Fields -->
+                    <div id="incorrectFields" class="form-fields" style="display: none;">
+                        <h3>CONTACT INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="incorrect_fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="incorrect_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                        </div>
+                        <div class="form-group">
+                            <label for="incorrect_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="incorrect_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                        </div>
+                        
+                        <h3>INCORRECT DETAILS</h3>
+                        <div class="form-group">
+                            <label for="incorrect_appFeature">App Feature <span class="required">*</span></label>
+                            <input type="text" id="incorrect_appFeature" name="appFeature" placeholder="Atomic Shop, Wiki, etc" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="incorrect_featurePage">Feature Page</label>
+                            <input type="text" id="incorrect_featurePage" name="featurePage" placeholder="Bundles, Tips, etc" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="incorrect_incorrectInfo">Incorrect Information <span class="required">*</span></label>
+                            <textarea id="incorrect_incorrectInfo" name="incorrectInfo" rows="3" maxlength="500"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="incorrect_correctInfo">Correct Information <span class="required">*</span></label>
+                            <textarea id="incorrect_correctInfo" name="correctInfo" rows="3" maxlength="500"></textarea>
+                        </div>
+                        
+                        <h3>OTHER</h3>
+                        <div class="form-group">
+                            <label for="incorrect_additionalComments">Additional Comments</label>
+                            <textarea id="incorrect_additionalComments" name="additionalComments" rows="3" placeholder="A recent update has made this information irrelevant. Please update it ASAP!" maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Question Fields -->
+                    <div id="questionFields" class="form-fields" style="display: none;">
+                        <h3>CONTACT INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="question_fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="question_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                        </div>
+                        <div class="form-group">
+                            <label for="question_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="question_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                        </div>
+                        
+                        <h3>QUESTION DETAILS</h3>
+                        <div class="form-group">
+                            <label for="question_briefDescription">Brief Description <span class="required">*</span></label>
+                            <textarea id="question_briefDescription" name="briefDescription" rows="5" maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Suggestion Fields -->
+                    <div id="suggestionFields" class="form-fields" style="display: none;">
+                        <h3>CONTACT INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="suggestion_fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="suggestion_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                        </div>
+                        <div class="form-group">
+                            <label for="suggestion_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="suggestion_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                        </div>
+                        
+                        <h3>SUGGESTION DETAILS</h3>
+                        <div class="form-group">
+                            <label for="suggestion_briefDescription">Brief Description <span class="required">*</span></label>
+                            <textarea id="suggestion_briefDescription" name="briefDescription" rows="5" maxlength="1000"></textarea>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Hidden Fields for Additional Context -->
                 <input type="hidden" name="_subject" value="New Contact Form Submission from Wes Tek Website">
                 <input type="hidden" name="_website" value="westek.com">
                 
-                <button type="submit" id="submitButton" class="submit-button">
+                <button type="submit" id="submitButton" class="submit-button" style="display: none;">
                     <span id="buttonText">Send Message</span>
                 </button>
             </form>
@@ -774,7 +1066,7 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="#privacy">Privacy Policy</a>
                 <a href="mailto:support@westek.co" onclick="openSupportEmail(event)">Support</a>
             </div>
             <p>&copy; 2025 Wes Tek. All rights reserved.</p>
@@ -878,6 +1170,140 @@
             const submitButton = document.getElementById('submitButton');
             const buttonText = document.getElementById('buttonText');
             const formStatus = document.getElementById('formStatus');
+            const formTypeSelect = document.getElementById('formType');
+            const dynamicFields = document.getElementById('dynamicFields');
+            
+            // Form Field Configurations
+            const formConfigs = {
+                bug: {
+                    fields: 'bugFields',
+                    requiredFields: ['fullName', 'email', 'appName', 'briefDescription'],
+                    subject: 'Bug Report'
+                },
+                feedback: {
+                    fields: 'feedbackFields',
+                    requiredFields: ['fullName', 'email', 'briefDescription'],
+                    subject: 'Feedback'
+                },
+                incorrect: {
+                    fields: 'incorrectFields',
+                    requiredFields: ['fullName', 'email', 'appFeature', 'incorrectInfo', 'correctInfo'],
+                    subject: 'Incorrect Information Report'
+                },
+                question: {
+                    fields: 'questionFields',
+                    requiredFields: ['fullName', 'email', 'briefDescription'],
+                    subject: 'Question'
+                },
+                suggestion: {
+                    fields: 'suggestionFields',
+                    requiredFields: ['fullName', 'email', 'briefDescription'],
+                    subject: 'Suggestion'
+                }
+            };
+
+            // Handle Form Type Selection
+            formTypeSelect.addEventListener('change', function() {
+                const selectedType = this.value;
+                
+                // Hide All Field Sets
+                document.querySelectorAll('.form-fields').forEach(fields => {
+                    fields.style.display = 'none';
+                    // Remove Required Attribute From All Inputs
+                    fields.querySelectorAll('input, textarea, select').forEach(input => {
+                        input.removeAttribute('required');
+                        input.disabled = true;
+                    });
+                });
+                
+                // Show Selected Field Set
+                if (selectedType && formConfigs[selectedType]) {
+                    dynamicFields.style.display = 'block';
+                    submitButton.style.display = 'block';
+                    
+                    const selectedFields = document.getElementById(formConfigs[selectedType].fields);
+                    selectedFields.style.display = 'block';
+                    
+                    // Enable Inputs and Set Required Fields
+                    selectedFields.querySelectorAll('input, textarea, select').forEach(input => {
+                        input.disabled = false;
+                        
+                        // Check if this Field should be Required
+                        const fieldName = input.name;
+                        if (formConfigs[selectedType].requiredFields.includes(fieldName)) {
+                            input.setAttribute('required', 'required');
+                        }
+                    });
+                    
+                    // Update Form Subject
+                    const subjectField = form.querySelector('input[name="_subject"]');
+                    subjectField.value = `${formConfigs[selectedType].subject} - Wes Tek Website`;
+                } else {
+                    dynamicFields.style.display = 'none';
+                    submitButton.style.display = 'none';
+                }
+            });
+
+            // Sanitize Input Function
+            function sanitizeInput(input) {
+                // Remove any HTML Tags
+                input = input.replace(/<[^>]*>/g, '');
+                // Escape Special Characters
+                input = input.replace(/&/g, '&amp;')
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/"/g, '&quot;')
+                            .replace(/'/g, '&#x27;')
+                            .replace(/\//g, '&#x2F;');
+                return input.trim();
+            }
+
+            // Validate all Inputs Before Submission
+            function validateForm() {
+                const selectedType = formTypeSelect.value;
+                if (!selectedType) return false;
+                
+                const activeFields = document.getElementById(formConfigs[selectedType].fields);
+                const inputs = activeFields.querySelectorAll('input:not([disabled]), textarea:not([disabled]), select:not([disabled])');
+                
+                for (let input of inputs) {
+                    // Check HTML5 Validation
+                    if (!input.checkValidity()) {
+                        input.reportValidity();
+                        return false;
+                    }
+                    
+                    // Additional Validation for Specific Fields
+                    if (input.type === 'email') {
+                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (!emailPattern.test(input.value)) {
+                            showStatus('error', '❌ Please enter a valid email address.');
+                            input.focus();
+                            return false;
+                        }
+                    }
+                    
+                    if (input.name.includes('Name') && input.value) {
+                        const namePattern = /^[A-Za-z\s\-']+$/;
+                        if (!namePattern.test(input.value)) {
+                            showStatus('error', '❌ Please enter a valid name (letters, spaces, hyphens, and apostrophes only).');
+                            input.focus();
+                            return false;
+                        }
+                    }
+                    
+                    if ((input.name.includes('Version') || input.name === 'appVersion') && input.value) {
+                        const versionPattern = /^[0-9]+(\.[0-9]+)*$/;
+                        if (!versionPattern.test(input.value)) {
+                            showStatus('error', '❌ Please enter a valid version number (e.g., 1.2.3).');
+                            input.focus();
+                            return false;
+                        }
+                    }
+                }
+                
+                return true;
+            }
 
             // Show Status Message
             function showStatus(type, message) {
@@ -908,6 +1334,11 @@
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
+                // Validate Form First
+                if (!validateForm()) {
+                    return;
+                }
+                
                 try {
                     setLoading(true);
                     
@@ -919,11 +1350,17 @@
                     // Get Botpoison Challenge Solution
                     const { solution } = await botpoison.challenge();
                     
-                    // Collect Form Data
+                    // Collect and Sanitize Form Data
                     const formData = new FormData(form);
                     const jsonData = {};
+                    
+                    // Only Collect Data from Active (Non-Disabled) Fields
                     for (let [key, value] of formData.entries()) {
-                        jsonData[key] = value;
+                        const input = form.querySelector(`[name="${key}"]:not([disabled])`);
+                        if (input) {
+                            // Sanitize the Input Value
+                            jsonData[key] = sanitizeInput(value);
+                        }
                     }
                     
                     // Add Botpoison Solution
@@ -944,7 +1381,11 @@
                         const result = await response.json();
                         console.log('Success:', result);
                         showStatus('success', '✅ Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
+                        
+                        // Reset form
                         form.reset();
+                        dynamicFields.style.display = 'none';
+                        submitButton.style.display = 'none';
                     } else {
                         // Get Error Details if Available
                         let errorMessage = `HTTP error! status: ${response.status}`;
@@ -979,16 +1420,24 @@
 
             // Listen for Botpoison Events [Optional Debugging]
             form.addEventListener('botpoison:challenge', function() {
-                console.log('Botpoison challenge started');
+                console.log('Botpoison challenge started.');
             });
 
             form.addEventListener('botpoison:solved', function() {
-                console.log('Botpoison challenge solved');
+                console.log('Botpoison challenge solved.');
             });
 
             form.addEventListener('botpoison:error', function(e) {
                 console.error('Botpoison error:', e.detail);
                 showStatus('error', '❌ Security verification failed. Please refresh the page and try again.');
+            });
+            
+            // Add Input Event Listeners for Real-Time Validation
+            form.addEventListener('input', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    // Remove any Existing Error Styling when User Starts Typing
+                    e.target.style.borderColor = '';
+                }
             });
         });
 
@@ -998,35 +1447,35 @@
             const subject = encodeURIComponent('Support Request');
             const body = encodeURIComponent(
                 'Please provide the following information to help us assist you:\n\n' +
-                '<b><u>CONTACT INFORMATION</u></b>\n' +
+                '## CONTACT INFORMATION ##\n' +
                 'Full Name: \n' +
                 'Email Address: \n\n' +
                 
-                '<b><u>APP DETAILS</u></b>\n' +
+                '## APP DETAILS ##\n' +
                 'App Name: \n' +
                 'App Version: \n' +
                 'Purchase/Download Date: \n\n' +
                 
-                '<b><u>DEVICE INFORMATION</u></b>\n' +
+                '## DEVICE INFORMATION ##\n' +
                 'Device Model: (e.g., iPhone 14 Pro, iPad Air)\n' +
                 'iOS Version: (e.g., 17.2.1)\n' +
                 'Available Storage Space: \n\n' +
                 
-                '<b><u>ISSUE DETAILS</u></b>\n' +
+                '## ISSUE DETAILS ##\n' +
                 'Issue Type: (Bug Report / Feature Request / General Question / Account Issue)\n' +
                 'Brief Description: \n' +
                 'Steps to Reproduce: \n' +
                 'Expected Behavior: \n' +
                 'Actual Behavior: \n\n' +
                 
-                '<b><u>ADDITIONAL CONTEXT</u></b>\n' +
+                '## ADDITIONAL CONTEXT ##\n' +
                 'Screenshots/Videos: (Please attach if applicable)\n' +
                 'Error Messages: \n' +
                 'When did this start happening: \n' +
                 'Have you tried restarting the app: (Yes/No)\n' +
                 'Have you tried restarting your device: (Yes/No)\n\n' +
                 
-                '<b><u>OTHER</u></b>\n' +
+                '## OTHER ##\n' +
                 'Additional Comments: \n\n' +
                 
                 'Thank you for helping us improve our apps!'
