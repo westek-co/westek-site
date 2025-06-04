@@ -904,7 +904,7 @@
                     buttonText.textContent = 'Send Message';
                 }
             }
-
+/*
             // Handle form submission
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -938,7 +938,7 @@
                     setLoading(false);
                 }
             });
-
+*/
             // Listen for Botpoison events (optional)
             form.addEventListener('botpoison:challenge', function() {
                 console.log('Botpoison challenge started');
@@ -960,35 +960,35 @@
             const subject = encodeURIComponent('Support Request');
             const body = encodeURIComponent(
                 'Please provide the following information to help us assist you:\n\n' +
-                'CONTACT INFORMATION:\n' +
+                '<b><u>CONTACT INFORMATION</u></b>\n' +
                 'Full Name: \n' +
                 'Email Address: \n\n' +
                 
-                'APP DETAILS:\n' +
+                '<b><u>APP DETAILS</u></b>\n' +
                 'App Name: \n' +
                 'App Version: \n' +
                 'Purchase/Download Date: \n\n' +
                 
-                'DEVICE INFORMATION:\n' +
+                '<b><u>DEVICE INFORMATION</u></b>\n' +
                 'Device Model: (e.g., iPhone 14 Pro, iPad Air)\n' +
                 'iOS Version: (e.g., 17.2.1)\n' +
                 'Available Storage Space: \n\n' +
                 
-                'ISSUE DETAILS:\n' +
+                '<b><u>ISSUE DETAILS</u></b>\n' +
                 'Issue Type: (Bug Report / Feature Request / General Question / Account Issue)\n' +
                 'Brief Description: \n' +
                 'Steps to Reproduce: \n' +
                 'Expected Behavior: \n' +
                 'Actual Behavior: \n\n' +
                 
-                'ADDITIONAL CONTEXT:\n' +
+                '<b><u>ADDITIONAL CONTEXT</u></b>\n' +
                 'Screenshots/Videos: (Please attach if applicable)\n' +
                 'Error Messages: \n' +
                 'When did this start happening: \n' +
                 'Have you tried restarting the app: (Yes/No)\n' +
                 'Have you tried restarting your device: (Yes/No)\n\n' +
                 
-                'OTHER:\n' +
+                '<b><u>OTHER</u></b>\n' +
                 'Additional Comments: \n\n' +
                 
                 'Thank you for helping us improve our apps!'
