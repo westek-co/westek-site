@@ -740,7 +740,6 @@
                 class="contact-form" 
                 action="https://submit-form.com/ZUzdNuTfA" 
                 method="POST"
-                data-botpoison-public-key="pk_aa17784e-68fe-4beb-b8f0-ef28cd2a431a"
             >
                 <!-- Honeypot Field for Additional Spam Protection -->
                 <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
@@ -790,25 +789,25 @@
         let taglineInterval;
 
         /**
-         * Rotates through taglines every 3 seconds
-         * Shows one tagline at a time with fade transition
+         * Rotates Through Taglines every 3 Seconds
+         * Shows one Tagline at a Time with Fade Transition
          */
         function rotateTaglines() {
             if (!taglineRotationEnabled) return;
             
-            // Hide current tagline
+            // Hide Current Tagline
             taglines[currentTaglineIndex].classList.remove('active');
             
-            // Move to next tagline
+            // Move to Next Tagline
             currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
             
-            // Show next tagline
+            // Show Next Tagline
             taglines[currentTaglineIndex].classList.add('active');
         }
 
         /**
-         * Toggles the tagline rotation on/off
-         * When off, displays "The Wastelander" as default
+         * Toggles the Tagline Rotation ON/OFF
+         * When OFF, displays "The Wastelander" as Default
          */
         function toggleTagline() {
             taglineRotationEnabled = !taglineRotationEnabled;
@@ -816,25 +815,25 @@
             toggleButton.textContent = `Tagline: ${taglineRotationEnabled ? 'ON' : 'OFF'}`;
             
             if (!taglineRotationEnabled) {
-                // Stop rotation and show default tagline
+                // Stop Rotation and Show Default Tagline
                 clearInterval(taglineInterval);
                 taglines.forEach(tagline => tagline.classList.remove('active'));
                 taglines[0].classList.add('active'); // Show "The Wastelander"
                 currentTaglineIndex = 0;
             } else {
-                // Resume rotation
+                // Resume Rotation
                 startTaglineRotation();
             }
         }
 
         /**
-         * Starts the tagline rotation interval
+         * Starts the Tagline Rotation Interval
          */
         function startTaglineRotation() {
             taglineInterval = setInterval(rotateTaglines, 3000);
         }
 
-        // Initialize tagline rotation
+        // Initialize Tagline Rotation
         startTaglineRotation();
 
         // App Slider
@@ -847,19 +846,19 @@
         ];
 
         /**
-         * Changes the displayed app in the iPhone frame
+         * Changes the Displayed App in the iPhone Frame
          * @param {number} direction - 1 for next, -1 for previous
          */
         function changeApp(direction) {
             currentApp = (currentApp + direction + appNames.length) % appNames.length;
             appSlides.style.transform = `translateX(-${currentApp * 100}%)`;
             
-            // Update app info
+            // Update App Info
             document.getElementById('appName').textContent = appNames[currentApp];
             document.getElementById('appDescription').textContent = appDescriptions[currentApp];
         }
 
-        // Smooth scrolling for navigation links
+        // Smooth Scrolling for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -873,7 +872,7 @@
             });
         });
 
-        // Enhanced form submission with Botpoison integration
+        // Form Submission with Botpoison Integration
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contactForm');
             const submitButton = document.getElementById('submitButton');
@@ -886,7 +885,7 @@
                 formStatus.innerHTML = message;
                 formStatus.style.display = 'block';
                 
-                // Auto-hide success/error messages after 5 seconds
+                // Auto-Hide Success/Error Messages after 5 Seconds
                 if (type !== 'loading') {
                     setTimeout(() => {
                         formStatus.style.display = 'none';
@@ -905,43 +904,92 @@
                 }
             }
 
-        // Handle Form Submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            try {
-                setLoading(true);
+            // Handle Form Submission with Botpoison
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
                 
-                // Convert Form to JSON Object instead of FormData
-                const formData = new FormData(form);
-                const jsonData = {};
-                for (let [key, value] of formData.entries()) {
-                    jsonData[key] = value;
-                }
-                
-                // Submit to Formspark
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(jsonData)
-                });
+                try {
+                    setLoading(true);
+                    
+                    // Initialize Botpoison
+                    const botpoison = new Botpoison({
+                        publicKey: "pk_aa17784e-68fe-4beb-b8f0-ef28cd2a431a"
+                    });
 
-                if (response.ok) {
-                    showStatus('success', '✅ Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
-                    form.reset();
-                } else {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    // Get Botpoison Challenge Solution
+                    const { solution } = await botpoison.challenge();
+                    
+                    // Collect Form Data
+                    const formData = new FormData(form);
+                    const jsonData = {};
+                    for (let [key, value] of formData.entries()) {
+                        jsonData[key] = value;
+                    }
+                    
+                    // Add Botpoison Solution
+                    jsonData._botpoison = solution;
+                    
+                    // Submit to Formspark
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(jsonData)
+                    });
+
+                    // Check if Response is OK
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log('Success:', result);
+                        showStatus('success', '✅ Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
+                        form.reset();
+                    } else {
+                        // Get Error Details if Available
+                        let errorMessage = `HTTP error! status: ${response.status}`;
+                        try {
+                            const errorData = await response.json();
+                            if (errorData.message) {
+                                errorMessage = errorData.message;
+                            }
+                        } catch (e) {
+                            // Use Default Error Message if JSON Parsing Fails
+                        }
+                        throw new Error(errorMessage);
+                    }
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    
+                    // Handle Specific Error Types
+                    if (error.message.includes('Botpoison')) {
+                        showStatus('error', '❌ Security verification failed. Please try again.');
+                    } else if (error.message.includes('400')) {
+                        showStatus('error', '❌ Invalid form data. Please check your entries and try again.');
+                    } else if (error.message.includes('429')) {
+                        showStatus('error', '❌ Too many requests. Please wait a moment and try again.');
+                    } else {
+                        showStatus('error', '❌ Sorry, there was an error sending your message. Please try again or contact us directly at support@westek.co');
+                    }
+                } finally {
+                    setLoading(false);
                 }
-                
-            } catch (error) {
-                console.error('Form submission error:', error);
-                showStatus('error', '❌ Sorry, there was an error sending your message. Please try again or contact us directly at support@westek.co');
-            } finally {
-                setLoading(false);
-            }
+            });
+
+            // Listen for Botpoison Events [Optional Debugging]
+            form.addEventListener('botpoison:challenge', function() {
+                console.log('Botpoison challenge started');
+            });
+
+            form.addEventListener('botpoison:solved', function() {
+                console.log('Botpoison challenge solved');
+            });
+
+            form.addEventListener('botpoison:error', function(e) {
+                console.error('Botpoison error:', e.detail);
+                showStatus('error', '❌ Security verification failed. Please refresh the page and try again.');
+            });
         });
 
         // Support Email Handler
