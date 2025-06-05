@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Wes Tek</title>
+    <title>Wes Tek | Privacy Policy</title>
     <style>
-        /* Global Styles */
+        /* ==================== RESET & BASE STYLES ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -15,20 +15,44 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #B8B8B8;
+            background-color: #0D0D0D;
             overflow-x: hidden;
         }
 
-        /* Navigation Bar */
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3, h4 {
+            color: #FFFFFF;
+        }
+
+        a {
+            color: #00FFFF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #66FFFF;
+        }
+
+        /* ==================== LAYOUT UTILITIES ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ==================== NAVIGATION ==================== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(20, 20, 20, 0.95);
+            background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -43,13 +67,15 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #fff;
+            color: #00FFFF;
             text-decoration: none;
             transition: color 0.3s ease;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .logo:hover {
-            color: #4a90e2;
+            color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
         }
 
         .nav-links {
@@ -59,11 +85,15 @@
         }
 
         .nav-links a {
-            color: #fff;
+            color: #B8B8B8;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00FFFF;
         }
 
         .nav-links a::after {
@@ -73,19 +103,20 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #4a90e2;
+            background: #00FFFF;
             transition: width 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* Main Content */
+        /* ==================== MAIN CONTENT ==================== */
         .main-content {
             margin-top: 100px;
             padding: 3rem 0;
-            background: #f8f9fa;
+            background: #0D0D0D;
             min-height: calc(100vh - 200px);
         }
 
@@ -99,28 +130,31 @@
             text-align: center;
             margin-bottom: 3rem;
             padding: 2rem 0;
-            background: white;
+            background: #1A1A1A;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .page-header h1 {
             font-size: 2.5rem;
-            color: #333;
+            color: #FFFFFF;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .page-header .subtitle {
-            color: #666;
+            color: #B8B8B8;
             font-size: 1.1rem;
         }
 
         .policy-content {
-            background: white;
+            background: #1A1A1A;
             border-radius: 10px;
             padding: 3rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 255, 0.05);
             margin-bottom: 2rem;
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .policy-section {
@@ -129,15 +163,16 @@
 
         .policy-section h2 {
             font-size: 1.5rem;
-            color: #4a90e2;
+            color: #00FFFF;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .policy-section h3 {
             font-size: 1.2rem;
-            color: #333;
+            color: #FFFFFF;
             margin-bottom: 0.8rem;
             margin-top: 1.5rem;
         }
@@ -145,6 +180,7 @@
         .policy-section p {
             margin-bottom: 1rem;
             text-align: justify;
+            color: #B8B8B8;
         }
 
         .policy-section ul {
@@ -154,45 +190,62 @@
 
         .policy-section li {
             margin-bottom: 0.5rem;
+            color: #B8B8B8;
         }
 
         .contact-info {
-            background: #e9f4ff;
+            background: rgba(0, 255, 255, 0.1);
             padding: 1.5rem;
             border-radius: 8px;
-            border-left: 4px solid #4a90e2;
+            border-left: 4px solid #00FFFF;
             margin-top: 1rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .contact-info strong {
-            color: #4a90e2;
+            color: #00FFFF;
+        }
+
+        .contact-info p {
+            color: #B8B8B8;
         }
 
         .effective-dates {
-            background: #f8f9fa;
+            background: #2D2D2D;
             padding: 1rem 1.5rem;
             border-radius: 8px;
             margin-bottom: 2rem;
-            border: 1px solid #dee2e6;
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .effective-dates p {
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
-            color: #666;
+            color: #B8B8B8;
+        }
+
+        .effective-dates strong {
+            color: #00FFFF;
         }
 
         .back-link {
             display: inline-block;
             margin-bottom: 2rem;
-            color: #4a90e2;
+            color: #00FFFF;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            background: rgba(0, 255, 255, 0.05);
         }
 
         .back-link:hover {
-            color: #357abd;
+            color: #FFFFFF;
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00FFFF;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .back-link::before {
@@ -200,12 +253,22 @@
             margin-right: 0.5rem;
         }
 
-        /* Footer */
+        .compliance-note {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: #B8B8B8;
+            font-style: italic;
+        }
+
+        /* ==================== FOOTER ==================== */
         footer {
-            background: #222;
-            color: white;
+            background: #0D0D0D;
+            color: #B8B8B8;
             padding: 2rem 0;
             text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .footer-links {
@@ -216,16 +279,32 @@
         }
 
         .footer-links a {
-            color: white;
+            color: #B8B8B8;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: #4a90e2;
+            color: #00FFFF;
         }
 
-        /* Responsive Design */
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .policy-content {
+            animation: fadeIn 0.6s ease;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 768px) {
             .nav-links {
                 gap: 1rem;
@@ -282,7 +361,7 @@
             
             <div class="page-header">
                 <h1>Privacy Policy</h1>
-                <p class="subtitle">How we protect and handle your information</p>
+                <p class="subtitle">How we Protect and Handle your Information</p>
             </div>
 
             <div class="policy-content">
@@ -301,26 +380,26 @@
                     
                     <h3>Information You Provide</h3>
                     <ul>
-                        <li>Contact details submitted through our contact form (name, email address, message content)</li>
-                        <li>Information included in emails sent to our support address</li>
+                        <li>Contact details submitted through our contact form (name, email address, message content).</li>
+                        <li>Information included in emails sent to our support address.</li>
                     </ul>
 
                     <h3>Automatically Collected Information</h3>
                     <ul>
-                        <li>IP address and general location information</li>
-                        <li>Browser type and version</li>
-                        <li>Operating system</li>
-                        <li>Pages visited and time spent on our website</li>
-                        <li>Referring website addresses</li>
-                        <li>Device information (mobile, desktop, tablet)</li>
+                        <li>IP address and general location information.</li>
+                        <li>Browser type and version.</li>
+                        <li>Operating system.</li>
+                        <li>Pages visited and time spent on our website.</li>
+                        <li>Referring website addresses.</li>
+                        <li>Device information (mobile, desktop, tablet).</li>
                     </ul>
 
                     <h3>Cookies and Tracking Technologies</h3>
                     <p>We may use cookies and similar technologies to:</p>
                     <ul>
-                        <li>Improve website functionality and user experience</li>
-                        <li>Analyze website traffic and usage patterns</li>
-                        <li>Remember your preferences for future visits</li>
+                        <li>Improve website functionality and user experience.</li>
+                        <li>Analyze website traffic and usage patterns.</li>
+                        <li>Remember your preferences for future visits.</li>
                     </ul>
                     <p>You can disable cookies through your browser settings, though this may affect website functionality.</p>
                 </div>
@@ -329,10 +408,10 @@
                     <h2>How We Use Your Information</h2>
                     <p>We use collected information to:</p>
                     <ul>
-                        <li>Respond to inquiries submitted through our contact form or email</li>
-                        <li>Improve our website and services</li>
-                        <li>Analyze website performance and user behaviour</li>
-                        <li>Ensure website security and prevent abuse</li>
+                        <li>Respond to inquiries submitted through our contact form or email.</li>
+                        <li>Improve our website and services.</li>
+                        <li>Analyze website performance and user behaviour.</li>
+                        <li>Ensure website security and prevent abuse.</li>
                     </ul>
                 </div>
 
@@ -340,18 +419,18 @@
                     <h2>Information Sharing and Disclosure</h2>
                     <p>We do not sell, trade, or rent your personal information to third parties. We may share information only in these circumstances:</p>
                     <ul>
-                        <li><strong>Service Providers:</strong> With trusted third-party services that help us operate our website (hosting providers, analytics services)</li>
-                        <li><strong>Legal Requirements:</strong> When required by law, regulation, or legal process</li>
-                        <li><strong>Business Protection:</strong> To protect our rights, property, or safety, or that of our users</li>
+                        <li><strong>Service Providers:</strong> With trusted third-party services that help us operate our website (hosting providers, analytics services).</li>
+                        <li><strong>Legal Requirements:</strong> When required by law, regulation, or legal process.</li>
+                        <li><strong>Business Protection:</strong> To protect our rights, property, or safety, or that of our users.</li>
                     </ul>
                 </div>
 
                 <div class="policy-section">
                     <h2>Data Retention</h2>
                     <ul>
-                        <li><strong>Contact form and email inquiries:</strong> Retained for two years from last contact</li>
-                        <li><strong>Website analytics data:</strong> Retained according to our analytics provider's retention policies</li>
-                        <li><strong>Server logs:</strong> Retained for one year for security and performance purposes</li>
+                        <li><strong>Contact form and email inquiries:</strong> Retained for two years from last contact.</li>
+                        <li><strong>Website analytics data:</strong> Retained according to our analytics provider's retention policies.</li>
+                        <li><strong>Server logs:</strong> Retained for one year for security and performance purposes.</li>
                     </ul>
                 </div>
 
@@ -359,10 +438,10 @@
                     <h2>Your Rights (Ontario/Canada)</h2>
                     <p>Under applicable Canadian privacy laws, you have the right to:</p>
                     <ul>
-                        <li>Request access to personal information we hold about you</li>
-                        <li>Request correction of inaccurate personal information</li>
-                        <li>Request deletion of your personal information (subject to legal retention requirements)</li>
-                        <li>Withdraw consent where processing is based on consent</li>
+                        <li>Request access to personal information we hold about you.</li>
+                        <li>Request correction of inaccurate personal information.</li>
+                        <li>Request deletion of your personal information (subject to legal retention requirements).</li>
+                        <li>Withdraw consent where processing is based on consent.</li>
                     </ul>
                     <p>To exercise these rights, contact us at admin@westek.co.</p>
                 </div>
@@ -376,9 +455,9 @@
                     <h2>Third-Party Services</h2>
                     <p>Our website may use third-party services such as:</p>
                     <ul>
-                        <li>Web hosting providers</li>
-                        <li>Analytics services (e.g., Google Analytics)</li>
-                        <li>Content delivery networks</li>
+                        <li>Web Hosting Provider</li>
+                        <li>Analytics Services (e.g., Google Analytics)</li>
+                        <li>Content Delivery Networks</li>
                     </ul>
                     <p>These services have their own privacy policies governing how they handle data.</p>
                 </div>
@@ -406,7 +485,7 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #dee2e6; font-size: 0.9rem; color: #666; font-style: italic;">
+                <div class="compliance-note">
                     <p>This Privacy Policy complies with applicable Canadian privacy legislation, including the Personal Information Protection and Electronic Documents Act (PIPEDA) and Ontario's privacy laws.</p>
                 </div>
             </div>
@@ -417,15 +496,15 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="mailto:admin@westek.co">Support</a>
             </div>
-            <p>&copy; 2025 Wes Tek. All rights reserved.</p>
+            <p>&copy; Wes Tek. 2025. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Smooth Scrolling for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -439,14 +518,14 @@
             });
         });
 
-        // Scroll animations for nav
+        // Scroll Animations for Navigation
         function handleScroll() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(20, 20, 20, 0.98)';
+                nav.style.background = 'rgba(13, 13, 13, 0.98)';
                 nav.style.padding = '0.5rem 0';
             } else {
-                nav.style.background = 'rgba(20, 20, 20, 0.95)';
+                nav.style.background = 'rgba(13, 13, 13, 0.95)';
                 nav.style.padding = '1rem 0';
             }
         }
