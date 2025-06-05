@@ -8,17 +8,14 @@
     <title>WES TEK - iOS App Development | The Wastelander, GTA Gateway, & More</title>
     <meta name="title" content="WES TEK - iOS App Development | The Wastelander & More">
     <meta name="description" content="WES TEK creates innovative iOS applications. Developed by Wesley Synnott, a Canadian iOS developer focused on intuitive mobile experiences.">
-    <meta name="keywords" content="iOS development, mobile apps, Wesley Synnott, app development, Canadian developer, mobile applications">
     <meta name="author" content="Wesley Synnott">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://westek.co/">
     <meta property="og:title" content="WES TEK - iOS App Development | The Wastelander & More">
     <meta property="og:description" content="Innovative iOS applications including The Wastelander. Developed by Wesley Synnott, focusing on intuitive mobile experiences.">
-    <!-- <meta property="og:image" content="https://westek.co/assets/images/og-image.jpg"> -->
     <meta property="og:site_name" content="WES TEK">
     
     <!-- Twitter -->
@@ -34,6 +31,16 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' https://unpkg.com https://ucarecdn.com https://submit-form.com https://app.rybbit.io 'unsafe-inline'; 
+        style-src 'self' 'unsafe-inline'; 
+        img-src 'self' data: https:; 
+        connect-src 'self' https://submit-form.com https://api.botpoison.com https://app.rybbit.io; 
+        frame-ancestors 'none';
+    ">
     
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
@@ -54,13 +61,7 @@
             "@type": "ContactPoint",
             "email": "support@westek.co",
             "contactType": "customer support"
-        },
-        "sameAs": [
-            "https://twitter.com/westekco",
-            "https://www.linkedin.com/company/westekco",
-            "https://www.instagram.com/westekco",
-            "https://www.facebook.com/westekco"
-        ]
+        }
     }
     </script>
     
@@ -78,31 +79,6 @@
         }
     }
     </script>
-
-    <!--
-    TODO: Replace the above section with the following when The Wastelander is live on the App Store.
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "MobileApplication",
-        "name": "The Wastelander",
-        "operatingSystem": "iOS",
-        "applicationCategory": "UtilitiesApplication",
-        "description": "The ultimate post-apocalyptic companion app",
-        "author": {
-            "@type": "Organization",
-            "name": "WES TEK"
-        },
-        "downloadUrl": "https://apps.apple.com/app/idXXXXXXXXXX",      // TODO: Add App Store URL
-        "applicationId": "com.yourcompany.wastelander",                // TODO: Add iOS Bundle Identifier
-        "screenshot": [
-            "https://westek.co/assets/images/app-screenshot1.jpg",     // TODO: Add App Screenshots
-            "https://westek.co/assets/images/app-screenshot2.jpg"
-        ]
-    }
-    </script>
-
-    -->
 
     <style>
         /* ==================== RESET & BASE STYLES ==================== */
@@ -159,6 +135,7 @@
             width: 100%;
             background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
@@ -219,7 +196,8 @@
             box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
@@ -281,7 +259,7 @@
             opacity: 0;
             position: absolute;
             width: 100%;
-            transition: opacity 0.5s ease;
+            transition: opacity 1s ease;
             color: #00FFFF;
         }
 
@@ -457,8 +435,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: calc(100% + 120px);
-            left: -60px;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             padding: 0 1rem;
@@ -466,26 +443,27 @@
         }
 
         .app-nav button {
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid #00FFFF;
+            background: transparent;
+            border: none;
             color: #00FFFF;
-            font-size: 2rem;
+            font-size: 3rem;
             padding: 1rem;
-            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
             pointer-events: all;
+            line-height: 1;
         }
 
         .app-nav button:hover {
-            background: rgba(0, 255, 255, 0.2);
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            color: #FFFFFF;
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
         }
 
         .app-info {
             text-align: center;
             margin-top: 2rem;
+            min-height: 100px;
         }
 
         .app-info h3 {
@@ -496,6 +474,8 @@
 
         .app-info p {
             color: #B8B8B8;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         /* ==================== NEWS SECTION ==================== */
@@ -504,9 +484,11 @@
         }
 
         .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .news-card {
@@ -558,6 +540,74 @@
             color: #B8B8B8;
         }
 
+        .news-archive-button {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .archive-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #00FFFF;
+            border: 2px solid #00FFFF;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .archive-link:hover {
+            background: #00FFFF;
+            color: #0D0D0D;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Mobile News Carousel */
+        .news-carousel {
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .news-carousel .news-card {
+            min-width: 100%;
+            margin: 0;
+        }
+
+        .news-carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+
+        .news-carousel-nav button {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00FFFF;
+            color: #00FFFF;
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+        }
+
+        .news-carousel-nav button:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
         /* ==================== CONTACT SECTION ==================== */
         .contact {
             background: #0D0D0D;
@@ -603,6 +653,22 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             font-family: inherit;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Fix for Select Default State */
+        select:invalid {
+            color: #B8B8B8;
+        }
+
+        select option {
+            color: #FFFFFF;
+        }
+
+        select option[value=""] {
+            color: #B8B8B8;
         }
 
         .form-group input::placeholder,
@@ -629,9 +695,6 @@
         /* Select Dropdown */
         select {
             cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300FFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 1rem center;
@@ -674,16 +737,15 @@
             margin-left: 0.2rem;
         }
 
-        /* Form Validation */
+        /* Form Validation - Only show red/green after interaction */
         input:invalid:not(:focus):not(:placeholder-shown),
-        textarea:invalid:not(:focus):not(:placeholder-shown),
-        select:invalid:not(:focus) {
+        textarea:invalid:not(:focus):not(:placeholder-shown) {
             border-color: #FF0066;
         }
 
         input:valid:not(:focus):not(:placeholder-shown),
         textarea:valid:not(:focus):not(:placeholder-shown),
-        select:valid:not(:focus) {
+        select:valid:not(:focus):not([value=""]) {
             border-color: #00FF66;
         }
 
@@ -764,7 +826,7 @@
             margin-right: 0.5rem;
         }
 
-        /* Uploadcare Widget */
+        /* Uploadcare Widget Customization */
         .uploadcare--widget {
             width: 100% !important;
         }
@@ -773,14 +835,15 @@
             background: #1A1A1A !important;
             color: #B8B8B8 !important;
             border: 1px solid rgba(0, 255, 255, 0.2) !important;
-            padding: 1rem !important;
+            padding: 0.8rem !important;
             border-radius: 5px !important;
-            font-size: 1rem !important;
+            font-size: 0.9rem !important;
             font-weight: normal !important;
             width: 100% !important;
-            text-align: left !important;
+            text-align: center !important;
             transition: all 0.3s ease !important;
             font-family: inherit !important;
+            text-transform: none !important;
         }
 
         .uploadcare--widget__button:hover {
@@ -791,6 +854,7 @@
 
         .uploadcare--widget__text {
             margin: 0 !important;
+            text-transform: lowercase !important;
         }
 
         .uploadcare--widget__button_type_remove {
@@ -800,9 +864,37 @@
             margin-top: 0.5rem !important;
         }
 
+        /* Custom Widget Container */
+        .upload-widget-container {
+            position: relative;
+            background: #1A1A1A;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-widget-container:hover {
+            background: #2D2D2D;
+            border-color: #00FFFF;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
         /* Form Animation */
         .form-fields {
             animation: fadeIn 0.3s ease;
+        }
+
+        /* NoScript Fallback */
+        noscript {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 0, 102, 0.1);
+            border: 1px solid #FF0066;
+            color: #FF0066;
+            border-radius: 5px;
+            margin: 1rem 0;
         }
 
         /* ==================== FOOTER ==================== */
@@ -887,14 +979,9 @@
                 text-align: center;
             }
 
-            .app-nav {
-                width: calc(100% + 80px);
-                left: -40px;
-            }
-
             .app-nav button {
-                font-size: 1.5rem;
-                padding: 0.7rem;
+                font-size: 2.5rem;
+                padding: 0.5rem;
             }
 
             .form-fields h3 {
@@ -907,6 +994,15 @@
             
             .news-image {
                 font-size: 1.5rem;
+            }
+
+            /* Show News Carousel on Mobile */
+            .news-grid {
+                display: none;
+            }
+
+            .news-carousel {
+                display: block;
             }
         }
         
@@ -927,13 +1023,13 @@
     <link rel="preload" href="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" as="script">
     
     <!-- Botpoison Script -->
-    <script src="https://unpkg.com/@botpoison/browser" async></script>
+    <script src="https://unpkg.com/@botpoison/browser" async integrity="sha384-V8g9273r1KibI4FvO3OVnYqCaKzUEF0oU5GkE0JNqVY3cKRQUBPDMhBMyPK8Q9Xq" crossorigin="anonymous"></script>
 
-    <!-- Rybbit Script -->
-    <script src="https://app.rybbit.io/api/script.js" data-site-id="963" defer></script>
+    <!-- Rybbit Analytics Script -->
+    <script src="https://app.rybbit.io/api/script.js" data-site-id="963" async defer></script>
 
     <!-- Uploadcare Script -->
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" defer></script>
 
 </head>
 <body>
@@ -942,18 +1038,18 @@
         <div class="nav-container">
             <a href="#home" class="logo">WES TEK</a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#apps">Apps</a></li>
-                <li><a href="#news">News</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#apps" class="nav-link">Apps</a></li>
+                <li><a href="#news" class="nav-link">News</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <video class="video-background" autoplay muted loop>
+        <video class="video-background" autoplay muted loop playsinline>
             <source src="placeholder-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -963,8 +1059,8 @@
             <h1>WES TEK</h1>
             <h2>Innovative iOS App Development</h2>
             <div class="tagline-container">
-                <p class="tagline active" data-text="The Wastelander">The Wastelander</p>
-                <p class="tagline active" data-text="GTA Gateway">GTA Gateway</p>
+                <p class="tagline" data-text="The Wastelander">The Wastelander</p>
+                <p class="tagline" data-text="GTA Gateway">GTA Gateway</p>
             </div>
             <a href="#apps" class="cta-button">Explore Our Apps</a>
         </div>
@@ -1016,10 +1112,6 @@
                     <h3 id="appName">The Wastelander</h3>
                     <p id="appDescription">Experience the ultimate post-apocalyptic companion app!</p>
                 </div>
-                <div class="app-info">
-                    <h3 id="appName">GTA Gateway</h3>
-                    <p id="appDescription">Experience the ultimate post-apocalyptic companion app!</p>
-                </div>
             </div>
         </div>
     </section>
@@ -1028,6 +1120,8 @@
     <section id="news" class="news">
         <div class="container">
             <h2>Latest News</h2>
+            
+            <!-- Desktop News Grid -->
             <div class="news-grid">
                 <div class="news-card">
                     <div class="news-image">The Wastelander</div>
@@ -1046,6 +1140,36 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile News Carousel -->
+            <div class="news-carousel">
+                <div class="news-carousel-inner" id="newsCarousel">
+                    <div class="news-card">
+                        <div class="news-image">The Wastelander</div>
+                        <div class="news-content">
+                            <p class="news-date">May 1, 2025</p>
+                            <h3 class="news-title">The Wastelander Enters Development</h3>
+                            <p>WES TEK officially begins development on <strong>The Wastelander</strong>, a companion app for Fallout 76 players on iOS. This mobile app will feature event information, interactive maps, checklists, tips, and more to enhance your post-apocalyptic adventures.</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image">WES TEK</div>
+                        <div class="news-content">
+                            <p class="news-date">June 1, 2025</p>
+                            <h3 class="news-title">Website Launch</h3>
+                            <p>Our official WES TEK website is now live, offering information about our iOS app development, company background, and the latest updates on our projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-carousel-nav">
+                    <button onclick="changeNewsSlide(-1)">‹</button>
+                    <button onclick="changeNewsSlide(1)">›</button>
+                </div>
+            </div>
+
+            <div class="news-archive-button">
+                <a href="news.html" class="archive-link">Archived News</a>
+            </div>
         </div>
     </section>
 
@@ -1053,6 +1177,10 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2>Contact Us</h2>
+            
+            <noscript>
+                JavaScript is required to use the contact form. Please email us at support@westek.co instead.
+            </noscript>
             
             <!-- Status Message -->
             <div id="formStatus" class="form-status"></div>
@@ -1144,6 +1272,7 @@
                                 data-preview-step="true"
                                 data-effects="crop,enhance,rotate"
                                 data-clearable="true"
+                                data-system-dialog="false"
                             />
                         </div>
                         <div class="form-group">
@@ -1238,9 +1367,14 @@
         const taglines = document.querySelectorAll('.tagline');
         let taglineInterval;
 
-        // Rotates Through Taglines Every 3 Seconds
+        // Initialize First Tagline
+        if (taglines.length > 0) {
+            taglines[0].classList.add('active');
+        }
+
+        // Rotates Through Taglines Every 10 Seconds
         function rotateTaglines() {
-            if (!taglineRotationEnabled) return;
+            if (!taglineRotationEnabled || taglines.length === 0) return;
             
             // Hide Current Tagline
             taglines[currentTaglineIndex].classList.remove('active');
@@ -1248,8 +1382,10 @@
             // Move to Next Tagline
             currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
             
-            // Show Next Tagline
-            taglines[currentTaglineIndex].classList.add('active');
+            // Show Next Tagline with Delay
+            setTimeout(() => {
+                taglines[currentTaglineIndex].classList.add('active');
+            }, 500);
         }
 
         // Toggles the Tagline Rotation ON/OFF
@@ -1272,7 +1408,7 @@
 
         // Starts the Tagline Rotation Interval
         function startTaglineRotation() {
-            taglineInterval = setInterval(rotateTaglines, 3000);
+            taglineInterval = setInterval(rotateTaglines, 10000);
         }
 
         // Initialize Tagline Rotation
@@ -1297,6 +1433,17 @@
             document.getElementById('appDescription').textContent = appDescriptions[currentApp];
         }
 
+        // News Carousel for Mobile
+        let currentNewsSlide = 0;
+        const newsCarousel = document.getElementById('newsCarousel');
+        const newsCards = newsCarousel ? newsCarousel.children.length : 0;
+
+        function changeNewsSlide(direction) {
+            if (!newsCarousel) return;
+            currentNewsSlide = (currentNewsSlide + direction + newsCards) % newsCards;
+            newsCarousel.style.transform = `translateX(-${currentNewsSlide * 100}%)`;
+        }
+
         // Smooth Scrolling for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1310,6 +1457,29 @@
                 }
             });
         });
+
+        // Navigation Active State Based on Scroll Position
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
 
         // Form Submission with Botpoison Integration
         document.addEventListener('DOMContentLoaded', function() {
@@ -1455,7 +1625,7 @@
             // Show Status Message
             function showStatus(type, message) {
                 formStatus.className = `form-status ${type}`;
-                formStatus.innerHTML = message;
+                formStatus.textContent = message;
                 formStatus.style.display = 'block';
                 
                 // Auto-Hide Success/Error Messages After 5 Seconds
@@ -1609,6 +1779,30 @@
                     e.target.style.borderColor = '';
                 }
             });
+
+            // Customize Uploadcare Widget After It Loads
+            if (window.uploadcare) {
+                uploadcare.start();
+                
+                // Apply Custom Styling to Widget
+                const styleSheet = document.createElement('style');
+                styleSheet.textContent = `
+                    .uploadcare--widget__button {
+                        text-transform: lowercase !important;
+                    }
+                    .uploadcare--widget__text {
+                        text-transform: lowercase !important;
+                    }
+                    .uploadcare--dialog__container {
+                        background: #1A1A1A !important;
+                    }
+                    .uploadcare--dialog__panel {
+                        background: #2D2D2D !important;
+                        color: #B8B8B8 !important;
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+            }
         });
 
         // Support Email Handler
@@ -1641,6 +1835,9 @@
                 nav.style.background = 'rgba(13, 13, 13, 0.95)';
                 nav.style.padding = '1rem 0';
             }
+            
+            // Update Active Navigation State
+            updateActiveNav();
         }
 
         window.addEventListener('scroll', handleScroll);
@@ -1649,6 +1846,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Set Initial States
             handleScroll();
+            updateActiveNav();
         });
     </script>
 </body>
