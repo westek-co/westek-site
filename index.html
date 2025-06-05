@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://westek.co/">
     <meta property="og:title" content="WES TEK - iOS App Development | The Wastelander & More">
     <meta property="og:description" content="Innovative iOS applications including The Wastelander. Developed by Wesley Synnott, focusing on intuitive mobile experiences.">
-    <meta property="og:image" content="https://westek.co/assets/images/og-image.jpg">
+    <!-- <meta property="og:image" content="https://westek.co/assets/images/og-image.jpg"> -->
     <meta property="og:site_name" content="WES TEK">
     
     <!-- Twitter -->
@@ -55,21 +55,12 @@
             "email": "support@westek.co",
             "contactType": "customer support"
         },
-        "sameAs": []
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "WES TEK",
-        "url": "https://westek.co",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://westek.co/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
+        "sameAs": [
+            "https://twitter.com/westekco",
+            "https://www.linkedin.com/company/westekco",
+            "https://www.instagram.com/westekco",
+            "https://www.facebook.com/westekco"
+        ]
     }
     </script>
     
@@ -87,7 +78,32 @@
         }
     }
     </script>
-    
+
+    <!--
+    TODO: Replace the above section with the following when The Wastelander is live on the App Store.
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "The Wastelander",
+        "operatingSystem": "iOS",
+        "applicationCategory": "UtilitiesApplication",
+        "description": "The ultimate post-apocalyptic companion app",
+        "author": {
+            "@type": "Organization",
+            "name": "WES TEK"
+        },
+        "downloadUrl": "https://apps.apple.com/app/idXXXXXXXXXX",      // TODO: Add App Store URL
+        "applicationId": "com.yourcompany.wastelander",                // TODO: Add iOS Bundle Identifier
+        "screenshot": [
+            "https://westek.co/assets/images/app-screenshot1.jpg",     // TODO: Add App Screenshots
+            "https://westek.co/assets/images/app-screenshot2.jpg"
+        ]
+    }
+    </script>
+
+    -->
+
     <style>
         /* ==================== RESET & BASE STYLES ==================== */
         * {
@@ -913,6 +929,9 @@
     <!-- Botpoison Script -->
     <script src="https://unpkg.com/@botpoison/browser" async></script>
 
+    <!-- Rybbit Script -->
+    <script src="https://app.rybbit.io/api/script.js" data-site-id="963" defer></script>
+
     <!-- Uploadcare Script -->
     <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 
@@ -942,9 +961,10 @@
         <button class="tagline-toggle" onclick="toggleTagline()">Tagline: ON</button>
         <div class="hero-content">
             <h1>WES TEK</h1>
+            <h2>Innovative iOS App Development</h2>
             <div class="tagline-container">
                 <p class="tagline active" data-text="The Wastelander">The Wastelander</p>
-                <p class="tagline active" data-text="GTA Gateway">GTA Gateway/p>
+                <p class="tagline active" data-text="GTA Gateway">GTA Gateway</p>
             </div>
             <a href="#apps" class="cta-button">Explore Our Apps</a>
         </div>
@@ -1012,9 +1032,17 @@
                 <div class="news-card">
                     <div class="news-image">The Wastelander</div>
                     <div class="news-content">
+                        <p class="news-date">May 1, 2025</p>
+                        <h3 class="news-title">The Wastelander Enters Development</h3>
+                        <p>WES TEK officially begins development on <strong>The Wastelander</strong>, a companion app for Fallout 76 players on iOS. This mobile app will feature event information, interactive maps, checklists, tips, and more to enhance your post-apocalyptic adventures.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">WES TEK</div>
+                    <div class="news-content">
                         <p class="news-date">June 1, 2025</p>
-                        <h3 class="news-title">Announcing our First Project</h3>
-                        <p>After months of planning, WES TEK begins development work on The Wastelander.</p>
+                        <h3 class="news-title">Website Launch</h3>
+                        <p>Our official WES TEK website is now live, offering information about our iOS app development, company background, and the latest updates on our projects.</p>
                     </div>
                 </div>
             </div>
@@ -1255,8 +1283,8 @@
         const appSlides = document.getElementById('appSlides');
         const appNames = ['The Wastelander', 'GTA Gateway'];
         const appDescriptions = [
-            'Experience the ultimate post-apocalyptic companion app!',
-            'Your comprehensive guide to Los Santos and beyond in the upcoming GTA 6.'
+            'Experience the ultimate Fallout 76 post-apocalyptic companion app!',
+            'Your comprehensive guide to Los Santos and beyond in the upcoming Grand Theft Auto VI.'
         ];
 
         // Changes the Displayed App in the iPhone Frame
