@@ -3,7 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wes Tek</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>WES TEK - iOS App Development | The Wastelander, GTA Gateway, & More</title>
+    <meta name="title" content="WES TEK - iOS App Development | The Wastelander & More">
+    <meta name="description" content="WES TEK creates innovative iOS applications. Developed by Wesley Synnott, a Canadian iOS developer focused on intuitive mobile experiences.">
+    <meta name="keywords" content="iOS development, mobile apps, Wesley Synnott, app development, Canadian developer, mobile applications">
+    <meta name="author" content="Wesley Synnott">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://westek.co/">
+    <meta property="og:title" content="WES TEK - iOS App Development | The Wastelander & More">
+    <meta property="og:description" content="Innovative iOS applications including The Wastelander. Developed by Wesley Synnott, focusing on intuitive mobile experiences.">
+    <meta property="og:image" content="https://westek.co/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="WES TEK">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://westek.co/">
+    <meta property="twitter:title" content="WES TEK - iOS App Development">
+    <meta property="twitter:description" content="Innovative iOS applications including The Wastelander. Developed by Wesley Synnott.">
+    <meta property="twitter:image" content="https://westek.co/assets/images/twitter-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://westek.co/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "WES TEK",
+        "url": "https://westek.co",
+        "logo": "https://westek.co/assets/images/logo.png",
+        "description": "iOS app development company creating innovative mobile applications",
+        "founder": {
+            "@type": "Person",
+            "name": "Wesley Synnott",
+            "jobTitle": "iOS Developer",
+            "image": "https://westek.co/assets/images/developer/wesley-synnott.png"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "support@westek.co",
+            "contactType": "customer support"
+        },
+        "sameAs": []
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "WES TEK",
+        "url": "https://westek.co",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://westek.co/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "The Wastelander",
+        "operatingSystem": "iOS",
+        "applicationCategory": "UtilitiesApplication",
+        "description": "The ultimate post-apocalyptic companion app",
+        "author": {
+            "@type": "Organization",
+            "name": "WES TEK"
+        }
+    }
+    </script>
+    
     <style>
         /* ==================== RESET & BASE STYLES ==================== */
         * {
@@ -81,6 +165,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            white-space: nowrap;
         }
 
         .logo:hover {
@@ -291,21 +376,30 @@
             position: relative;
             width: 100%;
             padding-top: 200%;
+            background: url('https://cdn.jsdelivr.net/gh/westek/assets@main/iphone-frame.svg') center/contain no-repeat;
+            overflow: hidden;
+        }
+
+        /* Fallback for when image doesn't load */
+        .iphone-frame:before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: #2D2D2D;
             border-radius: 40px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 255, 0.1);
-            overflow: hidden;
             border: 1px solid rgba(0, 255, 255, 0.2);
+            z-index: -1;
         }
 
         .iphone-screen {
             position: absolute;
-            top: 5%;
-            left: 5%;
-            right: 5%;
-            bottom: 5%;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 15%;
             background: #0D0D0D;
-            border-radius: 30px;
+            border-radius: 20px;
             overflow: hidden;
         }
 
@@ -325,25 +419,21 @@
             min-width: 100%;
             height: 100%;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+        .app-screenshot {
+            width: 100%;
             height: 100%;
-            gap: 2px;
-            background: #0D0D0D;
-        }
-
-        .screenshot {
+            object-fit: cover;
             background: #1A1A1A;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #B8B8B8;
-            font-size: 0.8rem;
-            overflow: hidden;
+            font-size: 1.2rem;
             border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
@@ -351,7 +441,8 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 100%;
+            width: calc(100% + 120px);
+            left: -60px;
             display: flex;
             justify-content: space-between;
             padding: 0 1rem;
@@ -424,7 +515,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #B8B8B8;
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
@@ -486,7 +580,7 @@
         select {
             width: 100%;
             padding: 1rem;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid #00FFFF;
             border-radius: 5px;
             background: #1A1A1A;
             color: #FFFFFF;
@@ -751,9 +845,17 @@
 
         /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
             .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
+                gap: 0.8rem;
+                font-size: 0.85rem;
             }
 
             .hero h1 {
@@ -770,7 +872,8 @@
             }
 
             .app-nav {
-                padding: 0 0.5rem;
+                width: calc(100% + 80px);
+                left: -40px;
             }
 
             .app-nav button {
@@ -785,9 +888,28 @@
             input, textarea, select {
                 font-size: 16px; /* Prevents Zoom on iOS */
             }
+            
+            .news-image {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .nav-links a {
+                padding: 0.2rem;
+            }
         }
     </style>
 
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://unpkg.com/@botpoison/browser" as="script">
+    <link rel="preload" href="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" as="script">
+    
     <!-- Botpoison Script -->
     <script src="https://unpkg.com/@botpoison/browser" async></script>
 
@@ -799,7 +921,7 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#home" class="logo">Wes Tek</a>
+            <a href="#home" class="logo">WES TEK</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -819,9 +941,10 @@
         <div class="hero-overlay"></div>
         <button class="tagline-toggle" onclick="toggleTagline()">Tagline: ON</button>
         <div class="hero-content">
-            <h1>Wes Tek</h1>
+            <h1>WES TEK</h1>
             <div class="tagline-container">
                 <p class="tagline active" data-text="The Wastelander">The Wastelander</p>
+                <p class="tagline active" data-text="GTA Gateway">GTA Gateway/p>
             </div>
             <a href="#apps" class="cta-button">Explore Our Apps</a>
         </div>
@@ -830,10 +953,10 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About the Developer</h2>
+            <h2>About WES TEK</h2>
             <div class="about-content">
                 <div class="developer-photo">
-                    <img src="assets/images/developer/wesley-synnott.png" alt="Developer Photo">
+                    <img src="assets/images/developer/wesley-synnott.png" alt="Wesley Synnott - iOS Developer">
                 </div>
                 <div class="developer-info">
                     <h3>Wesley Synnott</h3>
@@ -855,14 +978,11 @@
                             <div class="app-slides" id="appSlides">
                                 <!-- App 1: The Wastelander -->
                                 <div class="app-slide">
-                                    <div class="screenshot-grid">
-                                        <div class="screenshot">Screenshot 1-1</div>
-                                        <div class="screenshot">Screenshot 1-2</div>
-                                        <div class="screenshot">Screenshot 1-3</div>
-                                        <div class="screenshot">Screenshot 1-4</div>
-                                        <div class="screenshot">Screenshot 1-5</div>
-                                        <div class="screenshot">Screenshot 1-6</div>
-                                    </div>
+                                    <div class="app-screenshot">The Wastelander Screenshot</div>
+                                </div>
+                                <!-- App 2: GTA Gateway -->
+                                <div class="app-slide">
+                                    <div class="app-screenshot">GTA Gateway Screenshot</div>
                                 </div>
                             </div>
                         </div>
@@ -890,7 +1010,7 @@
                     <div class="news-content">
                         <p class="news-date">June 1, 2025</p>
                         <h3 class="news-title">Announcing our First Project</h3>
-                        <p>After months of planning, Wes Tek begins development work on The Wastelander.</p>
+                        <p>After months of planning, WES TEK begins development work on The Wastelander.</p>
                     </div>
                 </div>
             </div>
@@ -947,7 +1067,7 @@
                         </div>
                         <div class="form-group">
                             <label for="accuracy_description">Description <span class="required">*</span></label>
-                            <textarea id="accuracy_description" name="description" rows="5" placeholder="I noticed that the Wiki section has some outdated information due to the most recent update. For example, a few Perk Cards are no longer accurate and have changed." maxlength="1000"></textarea>
+                            <textarea id="accuracy_description" name="description" rows="5" placeholder="I noticed that the Wiki section has some outdated information due to the most recent update. For example, a few of the Perk Cards are no longer accurate." maxlength="1000"></textarea>
                         </div>
                     </div>
                     
@@ -996,7 +1116,7 @@
                         </div>
                         <div class="form-group">
                             <label for="bug_description">Description <span class="required">*</span></label>
-                            <textarea id="bug_description" name="description" rows="5" placeholder="I am unable to open the Checklists section of the app. When I tap the tile, nothing happens. I have tried restarting both my app and my iOS device but the issue persists." maxlength="1000"></textarea>
+                            <textarea id="bug_description" name="description" rows="5" placeholder="I am unable to open the Checklists section of the app. When I tap the tile, nothing happens. I have tried restarting both the app and my iOS device but the issue persists." maxlength="1000"></textarea>
                         </div>
                     </div>
                     
@@ -1032,7 +1152,7 @@
                         </div>
                         <div class="form-group">
                             <label for="question_description">Description <span class="required">*</span></label>
-                            <textarea id="question_description" name="description" rows="5" maxlength="1000"></textarea>
+                            <textarea id="question_description" name="description" rows="5" placeholder="Why is this app so cool?!" maxlength="1000"></textarea>
                         </div>
                     </div>
                     
@@ -1052,13 +1172,13 @@
                         </div>
                         <div class="form-group">
                             <label for="suggestion_description">Description <span class="required">*</span></label>
-                            <textarea id="suggestion_description" name="description" rows="5" placeholder="I think it would be awesome if The Wastelander let us submit C.A.M.P. photos to be showcased in the app!" maxlength="1000"></textarea>
+                            <textarea id="suggestion_description" name="description" rows="5" placeholder="I think it would be awesome if we could submit C.A.M.P. photos and have them showcased in the app!" maxlength="1000"></textarea>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Hidden Fields for Additional Context -->
-                <input type="hidden" name="_subject" value="New Contact Form Submission from Wes Tek Website">
+                <input type="hidden" name="_subject" value="New Contact Form Submission from WES TEK">
                 <input type="hidden" name="_website" value="westek.com">
                 
                 <button type="submit" id="submitButton" class="submit-button" style="display: none;">
@@ -1075,7 +1195,7 @@
                 <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="mailto:support@westek.co" onclick="openSupportEmail(event)">Support</a>
             </div>
-            <p>&copy; 2025 Wes Tek. All rights reserved.</p>
+            <p>&copy; WES TEK. 2025. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1129,9 +1249,10 @@
         // App Slider
         let currentApp = 0;
         const appSlides = document.getElementById('appSlides');
-        const appNames = ['The Wastelander'];
+        const appNames = ['The Wastelander', 'GTA Gateway'];
         const appDescriptions = [
-            'Experience the ultimate post-apocalyptic companion app!'
+            'Experience the ultimate post-apocalyptic companion app!',
+            'Your comprehensive guide to Los Santos and beyond in the upcoming GTA 6.'
         ];
 
         // Changes the Displayed App in the iPhone Frame
@@ -1231,7 +1352,7 @@
                     
                     // Update Form Subject
                     const subjectField = form.querySelector('input[name="_subject"]');
-                    subjectField.value = `${formConfigs[selectedType].subject} - Wes Tek Website`;
+                    subjectField.value = `${formConfigs[selectedType].subject} - WES TEK`;
                 } else {
                     dynamicFields.style.display = 'none';
                     submitButton.style.display = 'none';
@@ -1500,4 +1621,3 @@
     </script>
 </body>
 </html>
-                            
