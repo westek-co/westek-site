@@ -612,6 +612,142 @@
             color: #4a90e2;
         }
 
+        /* Required field indicator */
+        .required {
+            color: #ff6b6b;
+            margin-left: 0.2rem;
+        }
+
+        /* Select Dropdown Styling */
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+            padding-right: 3rem;
+        }
+
+        select option {
+            background: #333;
+            color: white;
+        }
+
+        select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Uploadcare Widget Styling */
+        .uploadcare--widget {
+            width: 100% !important;
+        }
+
+        .uploadcare--widget__button {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            border: none !important;
+            padding: 1rem !important;
+            border-radius: 5px !important;
+            font-size: 1rem !important;
+            font-weight: normal !important;
+            width: 100% !important;
+            text-align: left !important;
+            transition: background 0.3s ease !important;
+            font-family: inherit !important;
+        }
+
+        .uploadcare--widget__button:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .uploadcare--widget__text {
+            margin: 0 !important;
+        }
+
+        .uploadcare--widget__button_type_remove {
+            background: transparent !important;
+            color: #ff6b6b !important;
+            padding: 0.5rem !important;
+            margin-top: 0.5rem !important;
+        }
+
+        /* Date Input Styling */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        /* Improved textarea styling */
+        textarea {
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        /* Field validation styling */
+        input:invalid:not(:focus):not(:placeholder-shown),
+        textarea:invalid:not(:focus):not(:placeholder-shown),
+        select:invalid:not(:focus) {
+            border: 1px solid #ff6b6b;
+        }
+
+        input:valid:not(:focus):not(:placeholder-shown),
+        textarea:valid:not(:focus):not(:placeholder-shown),
+        select:valid:not(:focus) {
+            border: 1px solid #51cf66;
+        }
+
+        /* Disabled field styling */
+        input:disabled,
+        textarea:disabled,
+        select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Form transition animations */
+        .form-fields {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .form-fields h3 {
+                font-size: 1rem;
+            }
+            
+            input, textarea, select {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
+
         /* Loading Spinner */
         .loading-spinner {
             width: 20px;
@@ -699,6 +835,9 @@
 
     <!-- Botpoison Script -->
     <script src="https://unpkg.com/@botpoison/browser" async></script>
+
+    <!-- Uploadcare Script -->
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 
 </head>
 <body>
@@ -857,7 +996,7 @@
                         <option value="">Select an option...</option>
                         <option value="bug">Bug Report</option>
                         <option value="feedback">Feedback</option>
-                        <option value="incorrect">Incorrect Information Report</option>
+                        <option value="accuracy">Accuracy Report</option>
                         <option value="question">Question</option>
                         <option value="suggestion">Suggestion</option>
                     </select>
@@ -867,17 +1006,14 @@
                 <div id="dynamicFields" style="display: none;">
                     <!-- Bug Report Fields -->
                     <div id="bugFields" class="form-fields" style="display: none;">
-                        <h3>CONTACT INFORMATION</h3>
                         <div class="form-group">
-                            <label for="bug_fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" id="bug_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <label for="bug_name">Name <span class="required">*</span></label>
+                            <input type="text" id="bug_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="bug_email">Email Address <span class="required">*</span></label>
                             <input type="email" id="bug_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
                         </div>
-                        
-                        <h3>APP DETAILS</h3>
                         <div class="form-group">
                             <label for="bug_appName">App Name <span class="required">*</span></label>
                             <input type="text" id="bug_appName" name="appName" placeholder="The Wastelander" maxlength="100">
@@ -886,8 +1022,6 @@
                             <label for="bug_appVersion">App Version</label>
                             <input type="text" id="bug_appVersion" name="appVersion" placeholder="1.2.3" pattern="[0-9]+(\.[0-9]+)*" title="Please enter a valid version number (e.g., 1.2.3)">
                         </div>
-                        
-                        <h3>DEVICE INFORMATION</h3>
                         <div class="form-group">
                             <label for="bug_deviceModel">Device Model</label>
                             <input type="text" id="bug_deviceModel" name="deviceModel" placeholder="iPhone 14 Pro, iPad Air, etc" maxlength="50">
@@ -897,156 +1031,101 @@
                             <input type="text" id="bug_iosVersion" name="iosVersion" placeholder="17.2.1, 18.5, etc" pattern="[0-9]+(\.[0-9]+)*" title="Please enter a valid iOS version (e.g., 17.2.1)">
                         </div>
                         <div class="form-group">
-                            <label for="bug_storageSpace">Storage Space</label>
-                            <input type="text" id="bug_storageSpace" name="storageSpace" placeholder="122.22 GB / 1.02 TB" maxlength="50">
-                        </div>
-                        
-                        <h3>ISSUE DETAILS</h3>
-                        <div class="form-group">
-                            <label for="bug_briefDescription">Brief Description <span class="required">*</span></label>
-                            <textarea id="bug_briefDescription" name="briefDescription" rows="3" maxlength="500"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bug_stepsToReproduce">Steps to Reproduce</label>
-                            <textarea id="bug_stepsToReproduce" name="stepsToReproduce" rows="4" placeholder="1. Open the app&#10;2. Navigate to...&#10;3. Click on...&#10;4. The bug appears" maxlength="1000"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bug_expectedBehavior">Expected Behavior</label>
-                            <textarea id="bug_expectedBehavior" name="expectedBehavior" rows="2" maxlength="500"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bug_actualBehavior">Actual Behavior</label>
-                            <textarea id="bug_actualBehavior" name="actualBehavior" rows="2" maxlength="500"></textarea>
-                        </div>
-                        
-                        <h3>ADDITIONAL CONTEXT</h3>
-                        <div class="form-group">
                             <label for="bug_screenshots">Screenshots/Videos</label>
-                            <input type="text" id="bug_screenshots" name="screenshots" placeholder="Attach if applicable (describe or provide links)" maxlength="200">
+                            <input
+                                type="hidden"
+                                role="uploadcare-uploader"
+                                id="bug_screenshots"
+                                name="screenshots"
+                                data-public-key="5d39ea2e2b9038e6c1ca"
+                                data-images-only="false"
+                                data-multiple="true"
+                                data-tabs="file camera"
+                                data-max-size="10485760"
+                                data-preview-step="true"
+                                data-effects="crop,enhance,rotate"
+                                data-clearable="true"
+                            />
                         </div>
                         <div class="form-group">
-                            <label for="bug_errorMessages">Error Messages</label>
-                            <textarea id="bug_errorMessages" name="errorMessages" rows="2" maxlength="500"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bug_startDate">Start Date</label>
-                            <input type="date" id="bug_startDate" name="startDate" max="9999-12-31">
-                        </div>
-                        <div class="form-group">
-                            <label for="bug_restartedApp">Restarted the App</label>
-                            <select id="bug_restartedApp" name="restartedApp">
-                                <option value="">Select...</option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bug_restartedDevice">Restarted the Device</label>
-                            <select id="bug_restartedDevice" name="restartedDevice">
-                                <option value="">Select...</option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        
-                        <h3>OTHER</h3>
-                        <div class="form-group">
-                            <label for="bug_additionalComments">Additional Comments</label>
-                            <textarea id="bug_additionalComments" name="additionalComments" rows="3" maxlength="1000"></textarea>
+                            <label for="bug_description">Description <span class="required">*</span></label>
+                            <textarea id="bug_description" name="description" rows="5" placeholder="I am unable to open the Checklists section of the app. When I tap the tile, nothing happens. I have tried restarting both my app and my iOS device but the issue persists." maxlength="1000"></textarea>
                         </div>
                     </div>
                     
                     <!-- Feedback Fields -->
                     <div id="feedbackFields" class="form-fields" style="display: none;">
-                        <h3>CONTACT INFORMATION</h3>
                         <div class="form-group">
-                            <label for="feedback_fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" id="feedback_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <label for="feedback_name">Name <span class="required">*</span></label>
+                            <input type="text" id="feedback_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="feedback_email">Email Address <span class="required">*</span></label>
                             <input type="email" id="feedback_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
                         </div>
-                        
-                        <h3>FEEDBACK DETAILS</h3>
                         <div class="form-group">
-                            <label for="feedback_briefDescription">Brief Description <span class="required">*</span></label>
-                            <textarea id="feedback_briefDescription" name="briefDescription" rows="5" maxlength="1000"></textarea>
+                            <label for="feedback_appName">App Name</label>
+                            <input type="text" id="feedback_appName" name="appName" placeholder="The Wastelander" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback_description">Description <span class="required">*</span></label>
+                            <textarea id="feedback_description" name="description" rows="5" placeholder="The Wastelander is my favourite app!" maxlength="1000"></textarea>
                         </div>
                     </div>
                     
-                    <!-- Incorrect Information Report Fields -->
-                    <div id="incorrectFields" class="form-fields" style="display: none;">
-                        <h3>CONTACT INFORMATION</h3>
+                    <!-- Accuracy Report Fields (formerly Incorrect Information Report) -->
+                    <div id="accuracyFields" class="form-fields" style="display: none;">
                         <div class="form-group">
-                            <label for="incorrect_fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" id="incorrect_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <label for="accuracy_name">Name <span class="required">*</span></label>
+                            <input type="text" id="accuracy_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
-                            <label for="incorrect_email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="incorrect_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                        </div>
-                        
-                        <h3>INCORRECT DETAILS</h3>
-                        <div class="form-group">
-                            <label for="incorrect_appFeature">App Feature <span class="required">*</span></label>
-                            <input type="text" id="incorrect_appFeature" name="appFeature" placeholder="Atomic Shop, Wiki, etc" maxlength="100">
+                            <label for="accuracy_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="accuracy_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
                         </div>
                         <div class="form-group">
-                            <label for="incorrect_featurePage">Feature Page</label>
-                            <input type="text" id="incorrect_featurePage" name="featurePage" placeholder="Bundles, Tips, etc" maxlength="100">
+                            <label for="accuracy_appName">App Name <span class="required">*</span></label>
+                            <input type="text" id="accuracy_appName" name="appName" placeholder="The Wastelander" maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label for="incorrect_incorrectInfo">Incorrect Information <span class="required">*</span></label>
-                            <textarea id="incorrect_incorrectInfo" name="incorrectInfo" rows="3" maxlength="500"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="incorrect_correctInfo">Correct Information <span class="required">*</span></label>
-                            <textarea id="incorrect_correctInfo" name="correctInfo" rows="3" maxlength="500"></textarea>
-                        </div>
-                        
-                        <h3>OTHER</h3>
-                        <div class="form-group">
-                            <label for="incorrect_additionalComments">Additional Comments</label>
-                            <textarea id="incorrect_additionalComments" name="additionalComments" rows="3" placeholder="A recent update has made this information irrelevant. Please update it ASAP!" maxlength="1000"></textarea>
+                            <label for="accuracy_description">Description <span class="required">*</span></label>
+                            <textarea id="accuracy_description" name="description" rows="5" placeholder="I noticed that the Wiki section has some outdated information due to the most recent update. For example, a few Perk Cards are no longer accurate and have changed." maxlength="1000"></textarea>
                         </div>
                     </div>
                     
                     <!-- Question Fields -->
                     <div id="questionFields" class="form-fields" style="display: none;">
-                        <h3>CONTACT INFORMATION</h3>
                         <div class="form-group">
-                            <label for="question_fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" id="question_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <label for="question_name">Name <span class="required">*</span></label>
+                            <input type="text" id="question_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="question_email">Email Address <span class="required">*</span></label>
                             <input type="email" id="question_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
                         </div>
-                        
-                        <h3>QUESTION DETAILS</h3>
                         <div class="form-group">
-                            <label for="question_briefDescription">Brief Description <span class="required">*</span></label>
-                            <textarea id="question_briefDescription" name="briefDescription" rows="5" maxlength="1000"></textarea>
+                            <label for="question_description">Description <span class="required">*</span></label>
+                            <textarea id="question_description" name="description" rows="5" maxlength="1000"></textarea>
                         </div>
                     </div>
                     
                     <!-- Suggestion Fields -->
                     <div id="suggestionFields" class="form-fields" style="display: none;">
-                        <h3>CONTACT INFORMATION</h3>
                         <div class="form-group">
-                            <label for="suggestion_fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" id="suggestion_fullName" name="fullName" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <label for="suggestion_name">Name <span class="required">*</span></label>
+                            <input type="text" id="suggestion_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="suggestion_email">Email Address <span class="required">*</span></label>
                             <input type="email" id="suggestion_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
                         </div>
-                        
-                        <h3>SUGGESTION DETAILS</h3>
                         <div class="form-group">
-                            <label for="suggestion_briefDescription">Brief Description <span class="required">*</span></label>
-                            <textarea id="suggestion_briefDescription" name="briefDescription" rows="5" maxlength="1000"></textarea>
+                            <label for="suggestion_appName">App Name</label>
+                            <input type="text" id="suggestion_appName" name="appName" placeholder="The Wastelander" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="suggestion_description">Description <span class="required">*</span></label>
+                            <textarea id="suggestion_description" name="description" rows="5" placeholder="I think it would be awesome if The Wastelander let us submit C.A.M.P. photos to be showcased in the app!" maxlength="1000"></textarea>
                         </div>
                     </div>
                 </div>
@@ -1177,27 +1256,27 @@
             const formConfigs = {
                 bug: {
                     fields: 'bugFields',
-                    requiredFields: ['fullName', 'email', 'appName', 'briefDescription'],
+                    requiredFields: ['name', 'email', 'appName', 'description'],
                     subject: 'Bug Report'
                 },
                 feedback: {
                     fields: 'feedbackFields',
-                    requiredFields: ['fullName', 'email', 'briefDescription'],
+                    requiredFields: ['name', 'email', 'description'],
                     subject: 'Feedback'
                 },
-                incorrect: {
-                    fields: 'incorrectFields',
-                    requiredFields: ['fullName', 'email', 'appFeature', 'incorrectInfo', 'correctInfo'],
-                    subject: 'Incorrect Information Report'
+                accuracy: {
+                    fields: 'accuracyFields',
+                    requiredFields: ['name', 'email', 'appName', 'description'],
+                    subject: 'Accuracy Report'
                 },
                 question: {
                     fields: 'questionFields',
-                    requiredFields: ['fullName', 'email', 'briefDescription'],
+                    requiredFields: ['name', 'email', 'description'],
                     subject: 'Question'
                 },
                 suggestion: {
                     fields: 'suggestionFields',
-                    requiredFields: ['fullName', 'email', 'briefDescription'],
+                    requiredFields: ['name', 'email', 'description'],
                     subject: 'Suggestion'
                 }
             };
@@ -1209,7 +1288,7 @@
                 // Hide All Field Sets
                 document.querySelectorAll('.form-fields').forEach(fields => {
                     fields.style.display = 'none';
-                    // Remove Required Attribute From All Inputs
+                    // Remove Required Attribute from All Inputs
                     fields.querySelectorAll('input, textarea, select').forEach(input => {
                         input.removeAttribute('required');
                         input.disabled = true;
@@ -1228,7 +1307,7 @@
                     selectedFields.querySelectorAll('input, textarea, select').forEach(input => {
                         input.disabled = false;
                         
-                        // Check if this Field should be Required
+                        // Check if This Field Should Be Required
                         const fieldName = input.name;
                         if (formConfigs[selectedType].requiredFields.includes(fieldName)) {
                             input.setAttribute('required', 'required');
@@ -1246,7 +1325,7 @@
 
             // Sanitize Input Function
             function sanitizeInput(input) {
-                // Remove any HTML Tags
+                // Remove Any HTML Tags
                 input = input.replace(/<[^>]*>/g, '');
                 // Escape Special Characters
                 input = input.replace(/&/g, '&amp;')
@@ -1258,13 +1337,13 @@
                 return input.trim();
             }
 
-            // Validate all Inputs Before Submission
+            // Validate All Inputs Before Submission
             function validateForm() {
                 const selectedType = formTypeSelect.value;
                 if (!selectedType) return false;
                 
                 const activeFields = document.getElementById(formConfigs[selectedType].fields);
-                const inputs = activeFields.querySelectorAll('input:not([disabled]), textarea:not([disabled]), select:not([disabled])');
+                const inputs = activeFields.querySelectorAll('input:not([disabled]):not([role="uploadcare-uploader"]), textarea:not([disabled]), select:not([disabled])');
                 
                 for (let input of inputs) {
                     // Check HTML5 Validation
@@ -1283,7 +1362,7 @@
                         }
                     }
                     
-                    if (input.name.includes('Name') && input.value) {
+                    if (input.name === 'name' && input.value) {
                         const namePattern = /^[A-Za-z\s\-']+$/;
                         if (!namePattern.test(input.value)) {
                             showStatus('error', '❌ Please enter a valid name (letters, spaces, hyphens, and apostrophes only).');
@@ -1311,7 +1390,7 @@
                 formStatus.innerHTML = message;
                 formStatus.style.display = 'block';
                 
-                // Auto-Hide Success/Error Messages after 5 Seconds
+                // Auto-Hide Success/Error Messages After 5 Seconds
                 if (type !== 'loading') {
                     setTimeout(() => {
                         formStatus.style.display = 'none';
@@ -1354,10 +1433,27 @@
                     const formData = new FormData(form);
                     const jsonData = {};
                     
+                    // Handle Uploadcare Widget for Bug Reports
+                    if (formTypeSelect.value === 'bug') {
+                        const widget = uploadcare.Widget('[role=uploadcare-uploader]:not([disabled])');
+                        if (widget) {
+                            try {
+                                const files = await widget.promise();
+                                if (files) {
+                                    const fileUrls = files.files().map(file => file.cdnUrl);
+                                    jsonData.screenshots = fileUrls;
+                                }
+                            } catch (err) {
+                                // User Cancelled or No Files Selected
+                                console.log('No files selected');
+                            }
+                        }
+                    }
+                    
                     // Only Collect Data from Active (Non-Disabled) Fields
                     for (let [key, value] of formData.entries()) {
                         const input = form.querySelector(`[name="${key}"]:not([disabled])`);
-                        if (input) {
+                        if (input && input.getAttribute('role') !== 'uploadcare-uploader') {
                             // Sanitize the Input Value
                             jsonData[key] = sanitizeInput(value);
                         }
@@ -1382,10 +1478,16 @@
                         console.log('Success:', result);
                         showStatus('success', '✅ Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
                         
-                        // Reset form
+                        // Reset Form
                         form.reset();
                         dynamicFields.style.display = 'none';
                         submitButton.style.display = 'none';
+                        
+                        // Reset Uploadcare Widget if Present
+                        const widget = uploadcare.Widget('[role=uploadcare-uploader]');
+                        if (widget) {
+                            widget.value(null);
+                        }
                     } else {
                         // Get Error Details if Available
                         let errorMessage = `HTTP error! status: ${response.status}`;
@@ -1435,7 +1537,7 @@
             // Add Input Event Listeners for Real-Time Validation
             form.addEventListener('input', function(e) {
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                    // Remove any Existing Error Styling when User Starts Typing
+                    // Remove Any Existing Error Styling When User Starts Typing
                     e.target.style.borderColor = '';
                 }
             });
@@ -1446,38 +1548,15 @@
             event.preventDefault();
             const subject = encodeURIComponent('Support Request');
             const body = encodeURIComponent(
-                'Please provide the following information to help us assist you:\n\n' +
-                '## CONTACT INFORMATION ##\n' +
+                'Please provide the following information to help us assist you (including photos/videos):\n\n' +
                 'Full Name: \n' +
                 'Email Address: \n\n' +
-                
-                '## APP DETAILS ##\n' +
                 'App Name: \n' +
                 'App Version: \n' +
-                'Purchase/Download Date: \n\n' +
-                
-                '## DEVICE INFORMATION ##\n' +
-                'Device Model: (e.g., iPhone 14 Pro, iPad Air)\n' +
-                'iOS Version: (e.g., 17.2.1)\n' +
-                'Available Storage Space: \n\n' +
-                
-                '## ISSUE DETAILS ##\n' +
-                'Issue Type: (Bug Report / Feature Request / General Question / Account Issue)\n' +
-                'Brief Description: \n' +
-                'Steps to Reproduce: \n' +
-                'Expected Behavior: \n' +
-                'Actual Behavior: \n\n' +
-                
-                '## ADDITIONAL CONTEXT ##\n' +
-                'Screenshots/Videos: (Please attach if applicable)\n' +
-                'Error Messages: \n' +
-                'When did this start happening: \n' +
-                'Have you tried restarting the app: (Yes/No)\n' +
-                'Have you tried restarting your device: (Yes/No)\n\n' +
-                
-                '## OTHER ##\n' +
-                'Additional Comments: \n\n' +
-                
+                'Device Model: [iPhone 14 Pro, iPad Air, etc]\n' +
+                'iOS Version: [17.2.1, 18.5, etc]\n' +
+                'Description: \n\n' +
+
                 'Thank you for helping us improve our apps!'
             );
             
