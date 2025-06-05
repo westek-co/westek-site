@@ -420,7 +420,7 @@
         .news-image {
             width: 100%;
             height: 200px;
-            background: #1A1A1A;
+            background: #1A1A1A url('assets/images/news/xcode.jpg') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -474,6 +474,10 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: #B8B8B8;
+        }
+
+        .form-group label[for="formType"] {
+            text-align: center;
         }
 
         /* Form Inputs */
@@ -882,7 +886,7 @@
             <h2>Latest News</h2>
             <div class="news-grid">
                 <div class="news-card">
-                    <div class="news-image">News Image 3</div>
+                    <div class="news-image">The Wastelander</div>
                     <div class="news-content">
                         <p class="news-date">June 1, 2025</p>
                         <h3 class="news-title">Announcing our First Project</h3>
@@ -913,9 +917,9 @@
                 
                 <!-- Form Type Selection -->
                 <div class="form-group">
-                    <label for="formType">What can we help you with?</label>
+                    <label for="formType">How may we be of service?</label>
                     <select id="formType" name="formType" required>
-                        <option value="">Select an option...</option>
+                        <option value="">Select an Option</option>
                         <option value="bug">Bug Report</option>
                         <option value="feedback">Feedback</option>
                         <option value="accuracy">Accuracy Report</option>
@@ -1067,7 +1071,7 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="mailto:support@westek.co" onclick="openSupportEmail(event)">Support</a>
             </div>
             <p>&copy; 2025 Wes Tek. All rights reserved.</p>
@@ -1458,14 +1462,14 @@
             event.preventDefault();
             const subject = encodeURIComponent('Support Request');
             const body = encodeURIComponent(
-                'Please provide the following information to help us assist you (including photos/videos):\n\n' +
+                'Please provide the following information to help us assist you:\n\n' +
                 'Full Name: \n' +
                 'Email Address: \n\n' +
                 'App Name: \n' +
                 'App Version: \n' +
                 'Device Model: [iPhone 14 Pro, iPad Air, etc]\n' +
                 'iOS Version: [17.2.1, 18.5, etc]\n' +
-                'Description: \n\n' +
+                'Reason for Request: \n\n' +
 
                 'Thank you for helping us improve our apps!'
             );
