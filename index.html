@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wes Tek</title>
     <style>
-        /* Global Styles */
+        /* ==================== RESET & BASE STYLES ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -15,20 +15,54 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #B8B8B8;
+            background-color: #0D0D0D;
             overflow-x: hidden;
         }
 
-        /* Navigation Bar */
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3, h4 {
+            color: #FFFFFF;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        a {
+            color: #00FFFF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #66FFFF;
+        }
+
+        /* ==================== LAYOUT UTILITIES ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* ==================== NAVIGATION ==================== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(20, 20, 20, 0.95);
+            background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -43,13 +77,15 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #fff;
+            color: #00FFFF;
             text-decoration: none;
             transition: color 0.3s ease;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .logo:hover {
-            color: #4a90e2;
+            color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
         }
 
         .nav-links {
@@ -59,11 +95,15 @@
         }
 
         .nav-links a {
-            color: #fff;
+            color: #B8B8B8;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00FFFF;
         }
 
         .nav-links a::after {
@@ -73,15 +113,16 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #4a90e2;
+            background: #00FFFF;
             transition: width 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* Hero Section */
+        /* ==================== HERO SECTION ==================== */
         .hero {
             position: relative;
             height: 100vh;
@@ -89,6 +130,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
         }
 
         .video-background {
@@ -99,6 +141,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            opacity: 0.3;
         }
 
         .hero-overlay {
@@ -107,13 +150,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(13, 13, 13, 0.7);
             z-index: -1;
         }
 
         .hero-content {
             text-align: center;
-            color: white;
+            color: #FFFFFF;
             z-index: 1;
             max-width: 800px;
             padding: 0 2rem;
@@ -123,6 +166,7 @@
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
         }
 
         .tagline-container {
@@ -137,6 +181,7 @@
             position: absolute;
             width: 100%;
             transition: opacity 0.5s ease;
+            color: #00FFFF;
         }
 
         .tagline.active {
@@ -147,11 +192,11 @@
             position: absolute;
             top: 2rem;
             right: 2rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(45, 45, 45, 0.8);
+            border: 1px solid #00FFFF;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            color: white;
+            color: #00FFFF;
             cursor: pointer;
             font-size: 0.9rem;
             transition: all 0.3s ease;
@@ -159,48 +204,32 @@
         }
 
         .tagline-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .cta-button {
             display: inline-block;
             padding: 1rem 3rem;
-            background: #4a90e2;
-            color: white;
+            background: #00FFFF;
+            color: #0D0D0D;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
             transform: translateY(0);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .cta-button:hover {
-            background: #357abd;
+            background: #FFFFFF;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
         }
 
-        /* Section Styles */
-        section {
-            padding: 5rem 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        /* About Section */
+        /* ==================== ABOUT SECTION ==================== */
         .about {
-            background: #f8f9fa;
+            background: #1A1A1A;
         }
 
         .about-content {
@@ -221,7 +250,8 @@
             height: 250px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            border: 2px solid #00FFFF;
         }
 
         .developer-info {
@@ -232,18 +262,23 @@
         .developer-info h3 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            color: #4a90e2;
+            color: #00FFFF;
         }
 
         .developer-info h4 {
             font-size: 1.2rem;
-            color: #666;
+            color: #B8B8B8;
             margin-bottom: 1.5rem;
         }
 
-        /* Apps Section */
+        .developer-info p {
+            color: #B8B8B8;
+            line-height: 1.8;
+        }
+
+        /* ==================== APPS SECTION ==================== */
         .apps {
-            background: #fff;
+            background: #0D0D0D;
         }
 
         .apps-showcase {
@@ -256,10 +291,11 @@
             position: relative;
             width: 100%;
             padding-top: 200%;
-            background: #1a1a1a;
+            background: #2D2D2D;
             border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 255, 0.1);
             overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .iphone-screen {
@@ -268,7 +304,7 @@
             left: 5%;
             right: 5%;
             bottom: 5%;
-            background: #000;
+            background: #0D0D0D;
             border-radius: 30px;
             overflow: hidden;
         }
@@ -297,17 +333,18 @@
             grid-template-rows: repeat(3, 1fr);
             height: 100%;
             gap: 2px;
-            background: #000;
+            background: #0D0D0D;
         }
 
         .screenshot {
-            background: #444;
+            background: #1A1A1A;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #888;
+            color: #B8B8B8;
             font-size: 0.8rem;
             overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .app-nav {
@@ -322,9 +359,9 @@
         }
 
         .app-nav button {
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00FFFF;
+            color: #00FFFF;
             font-size: 2rem;
             padding: 1rem;
             border-radius: 50%;
@@ -334,8 +371,9 @@
         }
 
         .app-nav button:hover {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 255, 255, 0.2);
             transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
         .app-info {
@@ -346,12 +384,16 @@
         .app-info h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            color: #4a90e2;
+            color: #00FFFF;
         }
 
-        /* News Section */
+        .app-info p {
+            color: #B8B8B8;
+        }
+
+        /* ==================== NEWS SECTION ==================== */
         .news {
-            background: #f8f9fa;
+            background: #1A1A1A;
         }
 
         .news-grid {
@@ -361,26 +403,29 @@
         }
 
         .news-card {
-            background: white;
+            background: #2D2D2D;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .news-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.2);
+            border-color: #00FFFF;
         }
 
         .news-image {
             width: 100%;
             height: 200px;
-            background: #ddd;
+            background: #1A1A1A;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            color: #B8B8B8;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .news-content {
@@ -388,7 +433,7 @@
         }
 
         .news-date {
-            color: #666;
+            color: #00FFFF;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
@@ -396,17 +441,22 @@
         .news-title {
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: #333;
+            color: #FFFFFF;
         }
 
-        /* Contact Section */
+        .news-content p {
+            color: #B8B8B8;
+        }
+
+        /* ==================== CONTACT SECTION ==================== */
         .contact {
-            background: #333;
-            color: white;
+            background: #0D0D0D;
+            color: #B8B8B8;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .contact h2 {
-            color: white;
+            color: #FFFFFF;
         }
 
         .contact-form {
@@ -414,6 +464,7 @@
             margin: 0 auto;
         }
 
+        /* Form Groups */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -422,98 +473,118 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            color: #B8B8B8;
         }
 
+        /* Form Inputs */
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        select {
             width: 100%;
             padding: 1rem;
-            border: none;
+            border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            background: #1A1A1A;
+            color: #FFFFFF;
             font-size: 1rem;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(184, 184, 184, 0.5);
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        select:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.2);
+            border-color: #00FFFF;
+            background: #2D2D2D;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
         }
 
+        /* Textarea Specific */
         .form-group textarea {
             resize: vertical;
             min-height: 150px;
+            line-height: 1.5;
         }
- 
-        /* Form Section Headers */
+
+        /* Select Dropdown */
+        select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300FFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+            padding-right: 3rem;
+        }
+
+        select option {
+            background: #1A1A1A;
+            color: #FFFFFF;
+        }
+
+        /* Date Input */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(0.5) sepia(1) hue-rotate(180deg);
+            cursor: pointer;
+        }
+
+        /* Form Sections */
         .form-fields h3 {
-            color: #4a90e2;
+            color: #00FFFF;
             font-size: 1.1rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .form-fields h3:first-child {
             margin-top: 1rem;
         }
 
-        /* Required Field Indicator */
+        /* Required Indicator */
         .required {
-            color: #ff6b6b;
+            color: #00FFFF;
             margin-left: 0.2rem;
         }
 
-        /* Select Dropdown Styling */
-        select {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            transition: background 0.3s ease;
-            cursor: pointer;
+        /* Form Validation */
+        input:invalid:not(:focus):not(:placeholder-shown),
+        textarea:invalid:not(:focus):not(:placeholder-shown),
+        select:invalid:not(:focus) {
+            border-color: #FF0066;
         }
 
-        select option {
-            background: #333;
-            color: white;
+        input:valid:not(:focus):not(:placeholder-shown),
+        textarea:valid:not(:focus):not(:placeholder-shown),
+        select:valid:not(:focus) {
+            border-color: #00FF66;
         }
 
-        select:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
+        /* Disabled Fields */
+        input:disabled,
+        textarea:disabled,
+        select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        /* Date Input Styling */
-        input[type="date"] {
-            color-scheme: dark;
-        }
-
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-        }
-
-        /* Improved Textarea Styling */
-        textarea {
-            font-family: inherit;
-            line-height: 1.5;
-        }
-
+        /* Submit Button */
         .submit-button {
-            background: #4a90e2;
-            color: white;
+            background: #00FFFF;
+            color: #0D0D0D;
             border: none;
             padding: 1rem 3rem;
             border-radius: 50px;
@@ -523,66 +594,21 @@
             transition: all 0.3s ease;
             display: block;
             margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .submit-button:hover:not(:disabled) {
-            background: #357abd;
+            background: #FFFFFF;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
         }
 
         .submit-button:disabled {
-            background: #666;
+            background: #2D2D2D;
+            color: #B8B8B8;
             cursor: not-allowed;
             transform: none;
-        }
-
-        /* Field Validation Styling */
-        input:invalid:not(:focus):not(:placeholder-shown),
-        textarea:invalid:not(:focus):not(:placeholder-shown),
-        select:invalid:not(:focus) {
-            border: 1px solid #ff6b6b;
-        }
-
-        input:valid:not(:focus):not(:placeholder-shown),
-        textarea:valid:not(:focus):not(:placeholder-shown),
-        select:valid:not(:focus) {
-            border: 1px solid #51cf66;
-        }
-
-        /* Disabled Field Styling */
-        input:disabled,
-        textarea:disabled,
-        select:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Form Fransition Animations */
-        .form-fields {
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Improvements */
-        @media (max-width: 768px) {
-            .form-fields h3 {
-                font-size: 1rem;
-            }
-            
-            input, textarea, select {
-                font-size: 16px; /* Prevents Zoom on iOS */
-            }
+            box-shadow: none;
         }
 
         /* Status Messages */
@@ -595,158 +621,22 @@
         }
 
         .form-status.success {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid #4caf50;
-            color: #4caf50;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid #00FF66;
+            color: #00FF66;
         }
 
         .form-status.error {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid #f44336;
-            color: #f44336;
+            background: rgba(255, 0, 102, 0.1);
+            border: 1px solid #FF0066;
+            color: #FF0066;
         }
 
         .form-status.loading {
-            background: rgba(74, 144, 226, 0.2);
-            border: 1px solid #4a90e2;
-            color: #4a90e2;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00FFFF;
+            color: #00FFFF;
         }
-
-        /* Required field indicator */
-        .required {
-            color: #ff6b6b;
-            margin-left: 0.2rem;
-        }
-
-        /* Select Dropdown Styling */
-        select {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            transition: background 0.3s ease;
-            cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.2em;
-            padding-right: 3rem;
-        }
-
-        select option {
-            background: #333;
-            color: white;
-        }
-
-        select:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Uploadcare Widget Styling */
-        .uploadcare--widget {
-            width: 100% !important;
-        }
-
-        .uploadcare--widget__button {
-            background: rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
-            border: none !important;
-            padding: 1rem !important;
-            border-radius: 5px !important;
-            font-size: 1rem !important;
-            font-weight: normal !important;
-            width: 100% !important;
-            text-align: left !important;
-            transition: background 0.3s ease !important;
-            font-family: inherit !important;
-        }
-
-        .uploadcare--widget__button:hover {
-            background: rgba(255, 255, 255, 0.2) !important;
-        }
-
-        .uploadcare--widget__text {
-            margin: 0 !important;
-        }
-
-        .uploadcare--widget__button_type_remove {
-            background: transparent !important;
-            color: #ff6b6b !important;
-            padding: 0.5rem !important;
-            margin-top: 0.5rem !important;
-        }
-
-        /* Date Input Styling */
-        input[type="date"] {
-            color-scheme: dark;
-        }
-
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-        }
-
-        /* Improved textarea styling */
-        textarea {
-            font-family: inherit;
-            line-height: 1.5;
-        }
-
-        /* Field validation styling */
-        input:invalid:not(:focus):not(:placeholder-shown),
-        textarea:invalid:not(:focus):not(:placeholder-shown),
-        select:invalid:not(:focus) {
-            border: 1px solid #ff6b6b;
-        }
-
-        input:valid:not(:focus):not(:placeholder-shown),
-        textarea:valid:not(:focus):not(:placeholder-shown),
-        select:valid:not(:focus) {
-            border: 1px solid #51cf66;
-        }
-
-        /* Disabled field styling */
-        input:disabled,
-        textarea:disabled,
-        select:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Form transition animations */
-        .form-fields {
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive improvements */
-        @media (max-width: 768px) {
-            .form-fields h3 {
-                font-size: 1rem;
-            }
-            
-            input, textarea, select {
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-        }
-
 
         /* Loading Spinner */
         .loading-spinner {
@@ -760,17 +650,54 @@
             margin-right: 0.5rem;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Uploadcare Widget */
+        .uploadcare--widget {
+            width: 100% !important;
         }
 
-        /* Footer */
+        .uploadcare--widget__button {
+            background: #1A1A1A !important;
+            color: #B8B8B8 !important;
+            border: 1px solid rgba(0, 255, 255, 0.2) !important;
+            padding: 1rem !important;
+            border-radius: 5px !important;
+            font-size: 1rem !important;
+            font-weight: normal !important;
+            width: 100% !important;
+            text-align: left !important;
+            transition: all 0.3s ease !important;
+            font-family: inherit !important;
+        }
+
+        .uploadcare--widget__button:hover {
+            background: #2D2D2D !important;
+            border-color: #00FFFF !important;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
+        }
+
+        .uploadcare--widget__text {
+            margin: 0 !important;
+        }
+
+        .uploadcare--widget__button_type_remove {
+            background: transparent !important;
+            color: #FF0066 !important;
+            padding: 0.5rem !important;
+            margin-top: 0.5rem !important;
+        }
+
+        /* Form Animation */
+        .form-fields {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ==================== FOOTER ==================== */
         footer {
-            background: #222;
-            color: white;
+            background: #0D0D0D;
+            color: #B8B8B8;
             padding: 2rem 0;
             text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .footer-links {
@@ -781,16 +708,16 @@
         }
 
         .footer-links a {
-            color: white;
+            color: #B8B8B8;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: #4a90e2;
+            color: #00FFFF;
         }
 
-        /* Animations */
+        /* ==================== ANIMATIONS ==================== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -802,7 +729,23 @@
             }
         }
 
-        /* Responsive Design */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 768px) {
             .nav-links {
                 gap: 1rem;
@@ -829,6 +772,14 @@
             .app-nav button {
                 font-size: 1.5rem;
                 padding: 0.7rem;
+            }
+
+            .form-fields h3 {
+                font-size: 1rem;
+            }
+            
+            input, textarea, select {
+                font-size: 16px; /* Prevents Zoom on iOS */
             }
         }
     </style>
@@ -867,8 +818,6 @@
             <h1>Wes Tek</h1>
             <div class="tagline-container">
                 <p class="tagline active" data-text="The Wastelander">The Wastelander</p>
-                <!-- <p class="tagline" data-text="TradeRoute 76">TradeRoute 76</p> -->
-                <!-- <p class="tagline" data-text="... more apps coming soon!">... more apps coming soon!</p> -->
             </div>
             <a href="#apps" class="cta-button">Explore Our Apps</a>
         </div>
@@ -911,17 +860,6 @@
                                         <div class="screenshot">Screenshot 1-6</div>
                                     </div>
                                 </div>
-                                <!-- App 2: TradeRoute 76 -->
-                                <!--<div class="app-slide">
-                                    <div class="screenshot-grid">
-                                        <div class="screenshot">Screenshot 2-1</div>
-                                        <div class="screenshot">Screenshot 2-2</div>
-                                        <div class="screenshot">Screenshot 2-3</div>
-                                        <div class="screenshot">Screenshot 2-4</div>
-                                        <div class="screenshot">Screenshot 2-5</div>
-                                        <div class="screenshot">Screenshot 2-6</div>
-                                    </div>
-                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -943,22 +881,6 @@
         <div class="container">
             <h2>Latest News</h2>
             <div class="news-grid">
-                <!-- <div class="news-card">
-                    <div class="news-image">News Image 1</div>
-                    <div class="news-content">
-                        <p class="news-date">December 1, 2025</p>
-                        <h3 class="news-title">The Wastelander is Released</h3>
-                        <p><b>The Wastelander<b> is now live on the App Store, offering Fallout 76 players a comprehensive companion with built-in checklists, maps, guides, and more! From browsing the latest Atomic Shop items to tracking seasonal S.C.O.R.E. progress, this release brings months of community feedback to life in a polished, offline-capable package.</p>
-                    </div>
-                </div> -->
-                <!-- <div class="news-card">
-                    <div class="news-image">News Image 2</div>
-                    <div class="news-content">
-                        <p class="news-date">August 1, 2025</p>
-                        <h3 class="news-title">The Wastelander opens to Beta Testers</h3>
-                        <p>We've invited a select group of Fallout 76 fans to explore <b>The Wastelander<b>'s launch features, including the Atomic Shop database and Community Event Calendar. Beta testers are providing invaluable feedback on build infographics and checklist synchronization before our public launch this winter. If you're interested in joining the beta, then please <a href="mailto:support@westek.com?subject=Beta%20Tester%20Application&body=Name:%20%0AEmail:%20%0AiOS%20Device:%20%0AiOS%20Version:%20%0AMessage:%20">send us an email</a>.</p>
-                    </div>
-                </div> -->
                 <div class="news-card">
                     <div class="news-image">News Image 3</div>
                     <div class="news-content">
@@ -1073,7 +995,7 @@
                         </div>
                     </div>
                     
-                    <!-- Accuracy Report Fields (formerly Incorrect Information Report) -->
+                    <!-- Accuracy Report Fields -->
                     <div id="accuracyFields" class="form-fields" style="display: none;">
                         <div class="form-group">
                             <label for="accuracy_name">Name <span class="required">*</span></label>
@@ -1159,10 +1081,7 @@
         const taglines = document.querySelectorAll('.tagline');
         let taglineInterval;
 
-        /**
-         * Rotates Through Taglines every 3 Seconds
-         * Shows one Tagline at a Time with Fade Transition
-         */
+        // Rotates Through Taglines Every 3 Seconds
         function rotateTaglines() {
             if (!taglineRotationEnabled) return;
             
@@ -1176,10 +1095,7 @@
             taglines[currentTaglineIndex].classList.add('active');
         }
 
-        /**
-         * Toggles the Tagline Rotation ON/OFF
-         * When OFF, displays "The Wastelander" as Default
-         */
+        // Toggles the Tagline Rotation ON/OFF
         function toggleTagline() {
             taglineRotationEnabled = !taglineRotationEnabled;
             const toggleButton = document.querySelector('.tagline-toggle');
@@ -1197,9 +1113,7 @@
             }
         }
 
-        /**
-         * Starts the Tagline Rotation Interval
-         */
+        // Starts the Tagline Rotation Interval
         function startTaglineRotation() {
             taglineInterval = setInterval(rotateTaglines, 3000);
         }
@@ -1210,16 +1124,12 @@
         // App Slider
         let currentApp = 0;
         const appSlides = document.getElementById('appSlides');
-        const appNames = ['The Wastelander', 'TradeRoute 76'];
+        const appNames = ['The Wastelander'];
         const appDescriptions = [
-            'Experience the ultimate post-apocalyptic companion app',
-            'Master the wasteland economy with real-time trading'
+            'Experience the ultimate post-apocalyptic companion app!'
         ];
 
-        /**
-         * Changes the Displayed App in the iPhone Frame
-         * @param {number} direction - 1 for next, -1 for previous
-         */
+        // Changes the Displayed App in the iPhone Frame
         function changeApp(direction) {
             currentApp = (currentApp + direction + appNames.length) % appNames.length;
             appSlides.style.transform = `translateX(-${currentApp * 100}%)`;
@@ -1520,7 +1430,7 @@
                 }
             });
 
-            // Listen for Botpoison Events [Optional Debugging]
+            // Listen for Botpoison Events (Optional Debugging)
             form.addEventListener('botpoison:challenge', function() {
                 console.log('Botpoison challenge started.');
             });
@@ -1567,10 +1477,10 @@
         function handleScroll() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(20, 20, 20, 0.98)';
+                nav.style.background = 'rgba(13, 13, 13, 0.98)';
                 nav.style.padding = '0.5rem 0';
             } else {
-                nav.style.background = 'rgba(20, 20, 20, 0.95)';
+                nav.style.background = 'rgba(13, 13, 13, 0.95)';
                 nav.style.padding = '1rem 0';
             }
         }
@@ -1585,3 +1495,4 @@
     </script>
 </body>
 </html>
+                            
