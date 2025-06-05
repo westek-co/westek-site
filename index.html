@@ -920,9 +920,9 @@
                     <label for="formType">How may we be of service?</label>
                     <select id="formType" name="formType" required>
                         <option value="">Select an Option</option>
+                        <option value="accuracy">Accuracy Report</option>
                         <option value="bug">Bug Report</option>
                         <option value="feedback">Feedback</option>
-                        <option value="accuracy">Accuracy Report</option>
                         <option value="question">Question</option>
                         <option value="suggestion">Suggestion</option>
                     </select>
@@ -930,11 +930,32 @@
                 
                 <!-- Dynamic Form Fields Container -->
                 <div id="dynamicFields" style="display: none;">
+                    
+                    <!-- Accuracy Report Fields -->
+                    <div id="accuracyFields" class="form-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="accuracy_name">Name <span class="required">*</span></label>
+                            <input type="text" id="accuracy_name" name="name" placeholder="John Fallout" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                        </div>
+                        <div class="form-group">
+                            <label for="accuracy_email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="accuracy_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                        </div>
+                        <div class="form-group">
+                            <label for="accuracy_appName">App Name <span class="required">*</span></label>
+                            <input type="text" id="accuracy_appName" name="appName" placeholder="The Wastelander" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="accuracy_description">Description <span class="required">*</span></label>
+                            <textarea id="accuracy_description" name="description" rows="5" placeholder="I noticed that the Wiki section has some outdated information due to the most recent update. For example, a few Perk Cards are no longer accurate and have changed." maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                    
                     <!-- Bug Report Fields -->
                     <div id="bugFields" class="form-fields" style="display: none;">
                         <div class="form-group">
                             <label for="bug_name">Name <span class="required">*</span></label>
-                            <input type="text" id="bug_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <input type="text" id="bug_name" name="name" placeholder="John Fallout" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="bug_email">Email Address <span class="required">*</span></label>
@@ -983,7 +1004,7 @@
                     <div id="feedbackFields" class="form-fields" style="display: none;">
                         <div class="form-group">
                             <label for="feedback_name">Name <span class="required">*</span></label>
-                            <input type="text" id="feedback_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <input type="text" id="feedback_name" name="name" placeholder="John Fallout" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="feedback_email">Email Address <span class="required">*</span></label>
@@ -998,32 +1019,12 @@
                             <textarea id="feedback_description" name="description" rows="5" placeholder="The Wastelander is my favourite app!" maxlength="1000"></textarea>
                         </div>
                     </div>
-                    
-                    <!-- Accuracy Report Fields -->
-                    <div id="accuracyFields" class="form-fields" style="display: none;">
-                        <div class="form-group">
-                            <label for="accuracy_name">Name <span class="required">*</span></label>
-                            <input type="text" id="accuracy_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
-                        </div>
-                        <div class="form-group">
-                            <label for="accuracy_email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="accuracy_email" name="email" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                        </div>
-                        <div class="form-group">
-                            <label for="accuracy_appName">App Name <span class="required">*</span></label>
-                            <input type="text" id="accuracy_appName" name="appName" placeholder="The Wastelander" maxlength="100">
-                        </div>
-                        <div class="form-group">
-                            <label for="accuracy_description">Description <span class="required">*</span></label>
-                            <textarea id="accuracy_description" name="description" rows="5" placeholder="I noticed that the Wiki section has some outdated information due to the most recent update. For example, a few Perk Cards are no longer accurate and have changed." maxlength="1000"></textarea>
-                        </div>
-                    </div>
-                    
+
                     <!-- Question Fields -->
                     <div id="questionFields" class="form-fields" style="display: none;">
                         <div class="form-group">
                             <label for="question_name">Name <span class="required">*</span></label>
-                            <input type="text" id="question_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <input type="text" id="question_name" name="name" placeholder="John Fallout" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="question_email">Email Address <span class="required">*</span></label>
@@ -1039,7 +1040,7 @@
                     <div id="suggestionFields" class="form-fields" style="display: none;">
                         <div class="form-group">
                             <label for="suggestion_name">Name <span class="required">*</span></label>
-                            <input type="text" id="suggestion_name" name="name" placeholder="John Doe" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                            <input type="text" id="suggestion_name" name="name" placeholder="John Fallout" pattern="[A-Za-z\s\-']+" title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
                         </div>
                         <div class="form-group">
                             <label for="suggestion_email">Email Address <span class="required">*</span></label>
