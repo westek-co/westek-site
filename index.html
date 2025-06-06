@@ -30,7 +30,12 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="
@@ -50,7 +55,7 @@
         "name": "WES TEK",
         "url": "https://westek.co",
         "logo": "https://westek.co/assets/images/logo.png",
-        "description": "iOS app development company creating innovative mobile applications",
+        "description": "iOS app development company creating innovative mobile applications!",
         "founder": {
             "@type": "Person",
             "name": "Wesley Synnott",
@@ -72,7 +77,7 @@
         "name": "The Wastelander",
         "operatingSystem": "iOS",
         "applicationCategory": "UtilitiesApplication",
-        "description": "The ultimate post-apocalyptic companion app",
+        "description": "The ultimate post-apocalyptic companion app!",
         "author": {
             "@type": "Organization",
             "name": "WES TEK"
@@ -363,13 +368,13 @@
         .apps-showcase {
             position: relative;
             max-width: 400px;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
         }
 
         .iphone-frame {
             position: relative;
             width: 100%;
-            padding-top: 200%;
+            padding-top: 180%;
             background: url('https://cdn.jsdelivr.net/gh/westek/assets@main/iphone-frame.svg') center/contain no-repeat;
             overflow: hidden;
         }
@@ -433,13 +438,14 @@
 
         .app-nav {
             position: absolute;
-            top: 50%;
+            top: 45%;
             transform: translateY(-50%);
             width: 100%;
             display: flex;
             justify-content: space-between;
             padding: 0 1rem;
             pointer-events: none;
+            z-index: 10;
         }
 
         .app-nav button {
@@ -447,11 +453,16 @@
             border: none;
             color: #00FFFF;
             font-size: 3rem;
-            padding: 1rem;
+            padding: 0.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             pointer-events: all;
             line-height: 1;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .app-nav button:hover {
@@ -462,8 +473,8 @@
 
         .app-info {
             text-align: center;
-            margin-top: 2rem;
-            min-height: 100px;
+            margin-top: 1rem;
+            min-height: 80px;
         }
 
         .app-info h3 {
@@ -540,33 +551,12 @@
             color: #B8B8B8;
         }
 
-        .news-archive-button {
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .archive-link {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: transparent;
-            color: #00FFFF;
-            border: 2px solid #00FFFF;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .archive-link:hover {
-            background: #00FFFF;
-            color: #0D0D0D;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
         /* Mobile News Carousel */
         .news-carousel {
             display: none;
             position: relative;
             overflow: hidden;
+            margin-bottom: 3rem;
         }
 
         .news-carousel-inner {
@@ -580,26 +570,30 @@
         }
 
         .news-carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            position: relative;
+            top: auto;
+            transform: none;
             width: 100%;
             display: flex;
-            justify-content: space-between;
-            padding: 0 1rem;
-            pointer-events: none;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 0;
         }
 
         .news-carousel-nav button {
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid #00FFFF;
+            background: transparent;
+            border: 2px solid #00FFFF;
             color: #00FFFF;
             font-size: 2rem;
-            padding: 1rem;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
-            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .news-carousel-nav button:hover {
@@ -1166,10 +1160,6 @@
                     <button onclick="changeNewsSlide(1)">›</button>
                 </div>
             </div>
-
-            <div class="news-archive-button">
-                <a href="news.html" class="archive-link">Archived News</a>
-            </div>
         </div>
     </section>
 
@@ -1385,7 +1375,7 @@
             // Show Next Tagline with Delay
             setTimeout(() => {
                 taglines[currentTaglineIndex].classList.add('active');
-            }, 500);
+            }, 1000);
         }
 
         // Toggles the Tagline Rotation ON/OFF
@@ -1788,10 +1778,10 @@
                 const styleSheet = document.createElement('style');
                 styleSheet.textContent = `
                     .uploadcare--widget__button {
-                        text-transform: lowercase !important;
+                        text-transform: capitalize !important;
                     }
                     .uploadcare--widget__text {
-                        text-transform: lowercase !important;
+                        text-transform: capitalize !important;
                     }
                     .uploadcare--dialog__container {
                         background: #1A1A1A !important;
@@ -1799,6 +1789,34 @@
                     .uploadcare--dialog__panel {
                         background: #2D2D2D !important;
                         color: #B8B8B8 !important;
+                    }
+                    .uploadcare--dialog {
+                        background: rgba(13, 13, 13, 0.95) !important;
+                    }
+                    .uploadcare--dialog__body {
+                        background: #1A1A1A !important;
+                        color: #B8B8B8 !important;
+                    }
+                    .uploadcare--tab__header {
+                        background: #2D2D2D !important;
+                        border-color: rgba(0, 255, 255, 0.2) !important;
+                    }
+                    .uploadcare--tab__title {
+                        color: #B8B8B8 !important;
+                    }
+                    .uploadcare--menu__item:hover {
+                        background: rgba(0, 255, 255, 0.1) !important;
+                    }
+                    .uploadcare--button {
+                        background: #00FFFF !important;
+                        color: #0D0D0D !important;
+                    }
+                    .uploadcare--button:hover {
+                        background: #66FFFF !important;
+                    }
+                    .uploadcare--widget__dragndrop-area {
+                        background: #2D2D2D !important;
+                        border: 2px dashed rgba(0, 255, 255, 0.3) !important;
                     }
                 `;
                 document.head.appendChild(styleSheet);
