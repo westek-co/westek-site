@@ -363,6 +363,7 @@
         /* ==================== APPS SECTION ==================== */
         .apps {
             background: #0D0D0D;
+            padding: 5rem 0;
         }
 
         .apps-showcase {
@@ -371,62 +372,114 @@
             margin: 0 auto 3rem;
         }
 
-        .iphone-frame {
+        /* CSS iPhone Frame */
+        .phone {
             position: relative;
+            display: inline-block;
             width: 100%;
-            padding-top: 180%;
-            background: url('https://cdn.jsdelivr.net/gh/westek/assets@main/iphone-frame.svg') center/contain no-repeat;
+            max-width: 320px;
+            margin: 0 auto;
+            display: block;
+            background: #000;
+            border: 14px solid #111;
+            border-radius: 45px;
+            box-shadow: 
+                0 0 0 2px #333,
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 255, 255, 0.1);
             overflow: hidden;
         }
 
-        /* Fallback for when image doesn't load */
-        .iphone-frame:before {
+        /* Dynamic Island [iPhone 14/15] */
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            width: 126px;
+            height: 35px;
+            border-radius: 20px;
+            z-index: 10;
+            box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Alternative Notch Style [iPhone X-13] */
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #111;
+            width: 160px;
+            height: 30px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 10;
+        }
+
+        /* Speaker and Camera Details */
+        .notch::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: #2D2D2D;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            z-index: -1;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
         }
 
-        .iphone-screen {
+        .notch::after {
+            content: '';
             position: absolute;
-            top: 10%;
-            left: 10%;
-            right: 10%;
-            bottom: 15%;
-            background: #0D0D0D;
-            border-radius: 20px;
+            top: 7px;
+            right: 30px;
+            width: 6px;
+            height: 6px;
+            background: #222;
+            border-radius: 50%;
+            box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Screen Container */
+        .screen-container {
+            position: relative;
+            width: 100%;
+            padding-top: 216.5%; /* iPhone Aspect Ratio */
+            background: #1A1A1A;
             overflow: hidden;
         }
 
-        .app-container {
-            position: relative;
+        /* Screenshot Slides */
+        .screenshot-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-        }
-
-        .app-slides {
             display: flex;
             transition: transform 0.5s ease;
-            height: 100%;
         }
 
-        .app-slide {
+        .screenshot-slide {
             min-width: 100%;
             height: 100%;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .app-screenshot {
+        .screenshot-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
+        }
+
+        /* Placeholder */
+        .screenshot-placeholder {
+            width: 100%;
+            height: 100%;
             background: #1A1A1A;
             display: flex;
             align-items: center;
@@ -436,22 +489,65 @@
             border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        .app-nav {
-            position: relative;
-            top: auto;
-            transform: none;
-            width: 100%;
+        /* Home Indicator (iPhone X+) */
+        .home-indicator {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Side Buttons */
+        .side-button {
+            position: absolute;
+            background: #222;
+            border-radius: 2px;
+        }
+
+        .power-button {
+            right: -17px;
+            top: 120px;
+            width: 3px;
+            height: 80px;
+        }
+
+        .volume-up {
+            left: -17px;
+            top: 100px;
+            width: 3px;
+            height: 50px;
+        }
+
+        .volume-down {
+            left: -17px;
+            top: 160px;
+            width: 3px;
+            height: 50px;
+        }
+
+        .mute-switch {
+            left: -17px;
+            top: 60px;
+            width: 3px;
+            height: 30px;
+        }
+
+        /* Navigation */
+        .screenshot-nav {
             display: flex;
             justify-content: center;
             gap: 2rem;
             margin-top: 2rem;
-            padding: 0;
         }
 
-        .app-nav button {
+        .screenshot-nav button {
             background: transparent;
-            border: 2px solid #00FFFF;
-            color: #00FFFF;
+            border: 2px solid #FFD042;
+            color: #FFD042;
             font-size: 2rem;
             width: 60px;
             height: 60px;
@@ -463,28 +559,43 @@
             justify-content: center;
         }
 
-        .app-nav button:hover {
+        .screenshot-nav button:hover {
             color: #FFFFFF;
             transform: scale(1.2);
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            text-shadow: 0 0 20px rgba(255, 208, 66, 0.8);
         }
 
-        .app-info {
+        /* Info Section */
+        .screenshot-info {
             text-align: center;
             margin-top: 1rem;
             min-height: 80px;
         }
 
-        .app-info h3 {
+        .screenshot-info h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            color: #00FFFF;
+            color: #FFD042;
         }
 
-        .app-info p {
+        .screenshot-info p {
             color: #B8B8B8;
             max-width: 500px;
             margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .phone {
+                max-width: 280px;
+                border-width: 12px;
+            }
+            
+            .dynamic-island {
+                width: 100px;
+                height: 28px;
+                top: 10px;
+            }
         }
 
         /* ==================== NEWS SECTION ==================== */
@@ -1078,31 +1189,45 @@
     <!-- Apps Section -->
     <section id="apps" class="apps">
         <div class="container">
-            <h2>Our Apps</h2>
+            <h2>Method 2: Pure CSS Frame</h2>
             <div class="apps-showcase">
-                <div class="iphone-frame">
-                    <div class="iphone-screen">
-                        <div class="app-container">
-                            <div class="app-slides" id="appSlides">
-                                <!-- App 1: The Wastelander -->
-                                <div class="app-slide">
-                                    <div class="app-screenshot">The Wastelander Screenshot</div>
-                                </div>
-                                <!-- App 2: GTA Gateway -->
-                                <div class="app-slide">
-                                    <div class="app-screenshot">GTA Gateway Screenshot</div>
-                                </div>
+                <div class="phone">
+                    <!-- Dynamic Island for iPhone 14/15 -->
+                    <div class="dynamic-island"></div>
+                    <!-- Alternative: iPhone X-13 Notch -->
+                    <!-- <div class="notch"></div> -->
+                    
+                    <!-- Side Buttons -->
+                    <div class="side-button power-button"></div>
+                    <div class="side-button volume-up"></div>
+                    <div class="side-button volume-down"></div>
+                    <div class="side-button mute-switch"></div>
+                    
+                    <!-- Screen Content -->
+                    <div class="screen-container">
+                        <div class="screenshot-slides" id="screenshotSlides">
+                            <div class="screenshot-slide">
+                                <div class="screenshot-placeholder">Screenshot 1</div>
+                            </div>
+                            <div class="screenshot-slide">
+                                <div class="screenshot-placeholder">Screenshot 2</div>
+                            </div>
+                            <div class="screenshot-slide">
+                                <div class="screenshot-placeholder">Screenshot 3</div>
                             </div>
                         </div>
+                        <!-- Home Indicator -->
+                        <div class="home-indicator"></div>
                     </div>
                 </div>
-                <div class="app-nav">
-                    <button onclick="changeApp(-1)">‹</button>
-                    <button onclick="changeApp(1)">›</button>
+                
+                <div class="screenshot-nav">
+                    <button onclick="changeScreenshot(-1)">‹</button>
+                    <button onclick="changeScreenshot(1)">›</button>
                 </div>
-                <div class="app-info">
-                    <h3 id="appName">The Wastelander</h3>
-                    <p id="appDescription">Experience the ultimate post-apocalyptic companion app!</p>
+                <div class="screenshot-info">
+                    <h3 id="screenshotName">Event Tracker</h3>
+                    <p id="screenshotDescription">Never miss a public event with real-time notifications</p>
                 </div>
             </div>
         </div>
