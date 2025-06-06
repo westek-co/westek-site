@@ -584,18 +584,13 @@
             margin: 0 auto;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .phone {
-                max-width: 280px;
-                border-width: 12px;
-            }
-            
-            .dynamic-island {
-                width: 100px;
-                height: 28px;
-                top: 10px;
-            }
+        /* SEO Hidden Content */
+        .seo-content {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
 
         /* ==================== NEWS SECTION ==================== */
@@ -1092,7 +1087,7 @@
             }
             
             input, textarea, select {
-                font-size: 16px; /* Prevents Zoom on iOS */
+                font-size: 16px;
             }
             
             .news-image {
@@ -1107,7 +1102,20 @@
             .news-carousel {
                 display: block;
             }
+
+            /* iPhone Mockup on Mobile */
+            .phone {
+                max-width: 280px;
+                border-width: 12px;
+            }
+
+            .dynamic-island {
+                width: 100px;
+                height: 28px;
+                top: 10px;
+            }
         }
+
         
         @media (max-width: 480px) {
             .nav-links {
@@ -1217,14 +1225,29 @@
                         <div class="home-indicator"></div>
                     </div>
                 </div>
-                
+
+                <!-- Arrow Buttons -->
                 <div class="app-nav">
                     <button onclick="changeApp(-1)">‹</button>
                     <button onclick="changeApp(1)">›</button>
                 </div>
-                <div class="app-info">
-                    <h3 id="appName">The Wastelander</h3>
-                    <p id="appDescription">A Post-Apocalyptic Fallout 76 Companion App</p>
+
+                <!-- Screenshot Information -->
+                <div class="screenshot-info">
+                    <h3 id="screenshotName">The Wastelander</h3>
+                    <p id="screenshotDescription">A Post-Apocalyptic Fallout 76 Companion App!</p>
+                </div>
+                
+                <!-- SEO Hidden Content -->
+                <div class="seo-content">
+                    <div class="seo-screenshot-info">
+                        <h3>The Wastelander</h3>
+                        <p>Experience the ultimate Fallout 76 post-apocalyptic companion app.</p>
+                    </div>
+                    <div class="seo-screenshot-info">
+                        <h3>GTA Gateway</h3>
+                        <p>Your comprehensive guide to Los Santos and beyond in Grand Theft Auto VI.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1529,8 +1552,8 @@
         const appSlides = document.getElementById('appSlides');
         const appNames = ['The Wastelander', 'GTA Gateway'];
         const appDescriptions = [
-            'Experience the ultimate Fallout 76 post-apocalyptic companion app!',
-            'Your comprehensive guide to Los Santos and beyond in the upcoming Grand Theft Auto VI.'
+            'A Post-Apocalyptic Fallout 76 Companion App!',
+            'A Comprehensive Guide to Los Santos for GTA VI!'
         ];
 
         // Changes the Displayed App in the iPhone Frame
