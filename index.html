@@ -39,11 +39,11 @@
     
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self'; 
-        script-src 'self' https://unpkg.com https://ucarecdn.com https://submit-form.com https://app.rybbit.io 'unsafe-inline'; 
-        style-src 'self' 'unsafe-inline'; 
-        img-src 'self' data: https:; 
-        connect-src 'self' https://submit-form.com https://api.botpoison.com https://app.rybbit.io; 
+        default-src 'self';
+        script-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://ucarecdn.com https://submit-form.com https://app.rybbit.io 'unsafe-inline';
+        style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';
+        img-src 'self' data: https:;
+        connect-src 'self' https://submit-form.com https://api.botpoison.com https://app.rybbit.io;
         frame-ancestors 'none';
     ">
     
@@ -347,6 +347,7 @@
 
         .developer-info {
             flex: 2;
+            max-width: 600px;
             min-width: 300px;
         }
 
