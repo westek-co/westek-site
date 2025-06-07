@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "short_name": "",
+  "name": "WES TEK",
+  "short_name": "WES TEK",
   "icons": [
     {
       "src": "/assets/icons/favicon.ico",
@@ -33,7 +33,12 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#00FFFF",
+  "background_color": "#0D0D0D",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "description": "WES TEK | Innovative iOS App Development",
+  "categories": ["developer", "technology", "mobile", "apps"],
+  "orientation": "portrait-primary"
 }
