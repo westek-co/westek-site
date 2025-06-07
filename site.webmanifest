@@ -33,12 +33,12 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#00FFFF",
+  "theme_color": "#0D0D0D",
   "background_color": "#0D0D0D",
   "display": "standalone",
   "start_url": "/",
   "scope": "/",
-  "description": "WES TEK | Innovative iOS App Development",
+  "description": "WES TEK | iOS App Development",
   "categories": ["developer", "technology", "mobile", "apps"],
   "orientation": "portrait-primary"
 }
