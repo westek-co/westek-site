@@ -739,9 +739,9 @@
         }
 
         /* Form Inputs */
-        .form-group input,
+        .form-group input:not(uc-form-input input),
         .form-group textarea,
-        select {
+        select:not(uc-form-input select) {
             width: 100%;
             padding: 1rem;
             border: 1px solid #00FFFF;
@@ -924,58 +924,94 @@
             margin-right: 0.5rem;
         }
 
-        /* Uploadcare Widget Customization */
-        .uploadcare--widget {
-            width: 100% !important;
+        /* Uploadcare Custom Theme Class */
+        .uploadcare-cyan-theme {
+            /* Primary Accent Color - Cyan #00FFFF in OKLCH */
+            --uc-primary-oklch-dark: 92% 0.16 180;
+            
+            /* Background and Text Colors */
+            --uc-background-dark: #0D0D0D;
+            --uc-foreground-dark: #B8B8B8;
+            --uc-border-dark: rgba(0, 255, 255, 0.3);
+            
+            /* Button Colors */
+            --uc-simple-btn-dark: #1A1A1A;
+            --uc-simple-btn-hover-dark: #2D2D2D;
+            --uc-simple-btn-foreground-dark: #B8B8B8;
+            
+            /* Border Radius */
+            --uc-radius: 5px;
+            
+            /* Backdrop */
+            --uc-backdrop-dark: 0, 0, 0;
+            --uc-backdrop-opacity-dark: 0.8;
         }
 
-        .uploadcare--widget__button {
+        /* Uploadcare Button - Flat Input Style */
+        .uploadcare-cyan-theme uc-simple-btn button {
+            border: 1px solid #00FFFF !important;
             background: #1A1A1A !important;
             color: #B8B8B8 !important;
-            border: 1px solid rgba(0, 255, 255, 0.2) !important;
-            padding: 0.8rem !important;
+            padding: 1rem !important;
             border-radius: 5px !important;
-            font-size: 0.9rem !important;
-            font-weight: normal !important;
+            font-family: inherit !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
             width: 100% !important;
             text-align: center !important;
             transition: all 0.3s ease !important;
-            font-family: inherit !important;
-            text-transform: none !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
-        .uploadcare--widget__button:hover {
+        /* Uploadcare Button Hover State */
+        .uploadcare-cyan-theme uc-simple-btn button:hover {
             background: #2D2D2D !important;
+            border-color: #00FFFF !important;
+            transform: none !important;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
+        }
+
+        /* Uploadcare Button Focus State */
+        .uploadcare-cyan-theme uc-simple-btn button:focus {
+            outline: none !important;
             border-color: #00FFFF !important;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
         }
 
-        .uploadcare--widget__text {
-            margin: 0 !important;
-            text-transform: lowercase !important;
+        /* Uploadcare Done Button Override */
+        .uploadcare-cyan-theme .uc-done-btn {
+            background: #00FFFF !important;
+            color: #0D0D0D !important;
+            border: none !important;
+            padding: 0.5rem 2rem !important;
+            border-radius: 25px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
         }
 
-        .uploadcare--widget__button_type_remove {
-            background: transparent !important;
-            color: #FF0066 !important;
-            padding: 0.5rem !important;
-            margin-top: 0.5rem !important;
+        .uploadcare-cyan-theme .uc-done-btn:hover {
+            background: #FFFFFF !important;
+            transform: scale(1.05) !important;
         }
 
-        /* Custom Widget Container */
-        .upload-widget-container {
-            position: relative;
-            background: #1A1A1A;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 5px;
-            padding: 0.8rem;
-            transition: all 0.3s ease;
+        /* Upload Button Container */
+        .uploadcare-cyan-theme uc-simple-btn {
+            display: block !important;
+            width: 100% !important;
         }
 
-        .upload-widget-container:hover {
-            background: #2D2D2D;
-            border-color: #00FFFF;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        /* Uploadcare File Uploader Container */
+        .form-group.file-uploader-group {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Label for Uploadcare File Uploader */
+        .file-uploader-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #B8B8B8;
         }
 
         /* Form Animation */
@@ -1116,7 +1152,6 @@
             }
         }
 
-        
         @media (max-width: 480px) {
             .nav-links {
                 gap: 0.5rem;
@@ -1131,8 +1166,9 @@
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://unpkg.com/@botpoison/browser" as="script">
-    <link rel="preload" href="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" as="script">
-    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js" as="script" crossorigin="anonymous">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css" as="style">
+
     <!-- Botpoison Script -->
     <script src="https://unpkg.com/@botpoison/browser" async integrity="sha384-V8g9273r1KibI4FvO3OVnYqCaKzUEF0oU5GkE0JNqVY3cKRQUBPDMhBMyPK8Q9Xq" crossorigin="anonymous"></script>
 
@@ -1140,14 +1176,20 @@
     <script src="https://app.rybbit.io/api/script.js" data-site-id="963" async defer></script>
 
     <!-- Uploadcare Script -->
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" defer></script>
+    <script type="module">
+        import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';
+        UC.defineComponents(UC);
+    </script>
+
+    <!-- Uploadcare File Uploader v1 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css">
 
 </head>
 <body>
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#home" class="logo">WES TEK</a>
+            <a href="index.html" class="logo">WES TEK</a>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
@@ -1181,14 +1223,20 @@
     <section id="about" class="about">
         <div class="container">
             <h2>About WES TEK</h2>
+            <div class="company-info">
+                <h3>The Studio</h3>
+                <p>Founded in 2025 by Canadian developer Wesley Synnott, <strong>WES TEK</strong> is a lean, single-developer studio dedicated to building native iOS apps for Apple devices. Projects are organized around a modern MVVM architecture with an emphasis on clean structure, performance, and user-focused design.</p>
+                <p>The studio's upcoming app, <em>The Wastelander</em>, brings a companion-style toolkit to Fallout 76 players on iOS—combining checklist-driven progress tracking, interactive maps, guides, and more into a single, intuitive hub.</p>
+            </div>
             <div class="about-content">
                 <div class="developer-photo">
-                    <img src="assets/images/developer/wesley-synnott.png" alt="Wesley Synnott - iOS Developer">
+                    <img src="assets/images/about/wesley-synnott.png" alt="Wesley Synnott - iOS Developer">
                 </div>
                 <div class="developer-info">
                     <h3>Wesley Synnott</h3>
                     <h4>Developer</h4>
-                    <p>A Canadian iOS developer passionate about creating intuitive mobile experiences, he combines technical precision with user-centred design to build tools that enhance digital interaction. Currently developing his debut app, The Wastelander, he brings fresh perspective to mobile development through careful attention to functionality and user experience.</p>
+                    <p>Wesley Synnott is a Canadian iOS developer who specializes in Swift-first, SwiftUI-driven applications built on clean MVVM principles. His work emphasizes modular architecture, maintainable code, and seamless data integration using technologies like Core Data, iCloud, CloudKit, and Firebase.</p>
+                    <p>He brings a disciplined, user-centred approach to development—combining technical rigour with intuitive interface design to create scalable iOS applications built to perform.</p>
                 </div>
             </div>
         </div>
@@ -1215,10 +1263,10 @@
                     <div class="screen-container">
                         <div class="app-slides" id="appSlides">
                             <div class="app-slide">
-                                <div class="app-placeholder">App 1</div>
+                                <img src="assets/images/apps/community-calendar.png" alt="The Wastelander">
                             </div>
                             <div class="app-slide">
-                                <div class="app-placeholder">App 2</div>
+                                <img src="assets/images/apps/community-calendar.png" alt="GTA Gateway">
                             </div>
                         </div>
                         <!-- Home Indicator -->
@@ -1233,9 +1281,9 @@
                 </div>
 
                 <!-- Screenshot Information -->
-                <div class="screenshot-info">
-                    <h3 id="screenshotName">The Wastelander</h3>
-                    <p id="screenshotDescription">A Post-Apocalyptic Fallout 76 Companion App!</p>
+                <div class="app-info">
+                    <h3 id="appName">The Wastelander</h3>
+                    <p id="appDescription">A Post-Apocalyptic Fallout 76 Companion App!</p>
                 </div>
                 
                 <!-- SEO Hidden Content -->
@@ -1390,23 +1438,30 @@
                             <label for="bug_iosVersion">iOS Version</label>
                             <input type="text" id="bug_iosVersion" name="iosVersion" placeholder="17.2.1, 18.5, etc" pattern="[0-9]+(\.[0-9]+)*" title="Please enter a valid iOS version (e.g., 17.2.1)">
                         </div>
-                        <div class="form-group">
-                            <label for="bug_screenshots">Screenshots/Videos</label>
-                            <input
-                                type="hidden"
-                                role="uploadcare-uploader"
-                                id="bug_screenshots"
-                                name="screenshots"
-                                data-public-key="5d39ea2e2b9038e6c1ca"
-                                data-images-only="false"
-                                data-multiple="true"
-                                data-tabs="file camera"
-                                data-max-size="10485760"
-                                data-preview-step="true"
-                                data-effects="crop,enhance,rotate"
-                                data-clearable="true"
-                                data-system-dialog="false"
-                            />
+                        <!-- Uploadcare V1 Configuration and File Uploader -->
+                        <div class="form-group file-uploader-group">
+                            <label class="file-uploader-label">Screenshots/Videos (Optional)</label>
+                            <!-- Uploadcare Configuration -->
+                            <uc-config 
+                                ctx-name="bug-report-uploader" 
+                                pubkey="5d39ea2e2b9038e6c1ca"
+                                multiple="true"
+                                max-local-file-size-bytes="10485760"
+                                accept="image/*,video/*"
+                                img-only="false"
+                                source-list="local, camera"
+                                group-output="true"
+                            ></uc-config>
+                            <!-- File Uploader with Form Input -->
+                            <uc-file-uploader-regular 
+                                ctx-name="bug-report-uploader"
+                                class="uc-dark uploadcare-dark-theme"
+                            >
+                                <uc-form-input 
+                                    ctx-name="bug-report-uploader"
+                                    name="screenshots"
+                                ></uc-form-input>
+                            </uc-file-uploader-regular>
                         </div>
                         <div class="form-group">
                             <label for="bug_description">Description <span class="required">*</span></label>
@@ -1714,7 +1769,7 @@
                 if (!selectedType) return false;
                 
                 const activeFields = document.getElementById(formConfigs[selectedType].fields);
-                const inputs = activeFields.querySelectorAll('input:not([disabled]):not([role="uploadcare-uploader"]), textarea:not([disabled]), select:not([disabled])');
+                const inputs = activeFields.querySelectorAll('input:not([disabled]):not(uc-form-input), textarea:not([disabled]), select:not([disabled])');
                 
                 for (let input of inputs) {
                     // Check HTML5 Validation
@@ -1800,31 +1855,15 @@
                     // Get Botpoison Challenge Solution
                     const { solution } = await botpoison.challenge();
                     
-                    // Collect and Sanitize Form Data
+                    // Collect Form Data Using FormData API
                     const formData = new FormData(form);
                     const jsonData = {};
                     
-                    // Handle Uploadcare Widget for Bug Reports
-                    if (formTypeSelect.value === 'bug') {
-                        const widget = uploadcare.Widget('[role=uploadcare-uploader]:not([disabled])');
-                        if (widget) {
-                            try {
-                                const files = await widget.promise();
-                                if (files) {
-                                    const fileUrls = files.files().map(file => file.cdnUrl);
-                                    jsonData.screenshots = fileUrls;
-                                }
-                            } catch (err) {
-                                // User Cancelled or No Files Selected
-                                console.log('No files selected');
-                            }
-                        }
-                    }
-                    
-                    // Only Collect Data from Active (Non-Disabled) Fields
+                    // Process Form Data
                     for (let [key, value] of formData.entries()) {
+                        // Skip Disabled Fields and Internal Uploadcare Fields
                         const input = form.querySelector(`[name="${key}"]:not([disabled])`);
-                        if (input && input.getAttribute('role') !== 'uploadcare-uploader') {
+                        if (input && !input.closest('uc-form-input')) {
                             // Sanitize the Input Value
                             jsonData[key] = sanitizeInput(value);
                         }
@@ -1854,10 +1893,10 @@
                         dynamicFields.style.display = 'none';
                         submitButton.style.display = 'none';
                         
-                        // Reset Uploadcare Widget if Present
-                        const widget = uploadcare.Widget('[role=uploadcare-uploader]');
-                        if (widget) {
-                            widget.value(null);
+                        // Clear Uploadcare Files
+                        const fileUploader = document.querySelector('uc-file-uploader-regular');
+                        if (fileUploader && fileUploader.clear) {
+                            fileUploader.clear();
                         }
                     } else {
                         // Get Error Details if Available
@@ -1901,7 +1940,7 @@
             });
 
             form.addEventListener('botpoison:error', function(e) {
-                console.error('Botpoison error:', e.detail);
+                console.error('Botpoison Error:', e.detail);
                 showStatus('error', '❌ Security verification failed. Please refresh the page and try again.');
             });
             
@@ -1912,58 +1951,72 @@
                     e.target.style.borderColor = '';
                 }
             });
+        });
 
-            // Customize Uploadcare Widget After It Loads
-            if (window.uploadcare) {
-                uploadcare.start();
-                
-                // Apply Custom Styling to Widget
-                const styleSheet = document.createElement('style');
-                styleSheet.textContent = `
-                    .uploadcare--widget__button {
-                        text-transform: capitalize !important;
-                    }
-                    .uploadcare--widget__text {
-                        text-transform: capitalize !important;
-                    }
-                    .uploadcare--dialog__container {
-                        background: #1A1A1A !important;
-                    }
-                    .uploadcare--dialog__panel {
-                        background: #2D2D2D !important;
-                        color: #B8B8B8 !important;
-                    }
-                    .uploadcare--dialog {
-                        background: rgba(13, 13, 13, 0.95) !important;
-                    }
-                    .uploadcare--dialog__body {
-                        background: #1A1A1A !important;
-                        color: #B8B8B8 !important;
-                    }
-                    .uploadcare--tab__header {
-                        background: #2D2D2D !important;
-                        border-color: rgba(0, 255, 255, 0.2) !important;
-                    }
-                    .uploadcare--tab__title {
-                        color: #B8B8B8 !important;
-                    }
-                    .uploadcare--menu__item:hover {
-                        background: rgba(0, 255, 255, 0.1) !important;
-                    }
-                    .uploadcare--button {
-                        background: #00FFFF !important;
-                        color: #0D0D0D !important;
-                    }
-                    .uploadcare--button:hover {
-                        background: #66FFFF !important;
-                    }
-                    .uploadcare--widget__dragndrop-area {
-                        background: #2D2D2D !important;
-                        border: 2px dashed rgba(0, 255, 255, 0.3) !important;
-                    }
-                `;
-                document.head.appendChild(styleSheet);
+        // Initialize Uploadcare V1
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the File Uploader Element
+            const fileUploader = document.querySelector('uc-file-uploader-regular');
+            
+            if (!fileUploader) {
+                return;
             }
+            
+            // Text Capitalization for Uploadcare
+            const textReplacements = {
+                'upload files': 'Upload Files',
+                'from device': 'From Device',
+                'camera': 'Camera',
+                'drop files here': 'Drop Files Here'
+            };
+            
+            // Function to Apply Text Replacements
+            function capitalizeUploadcareText() {
+                const walker = document.createTreeWalker(
+                    document.body,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+                
+                let node;
+                while (node = walker.nextNode()) {
+                    if (node.parentElement && node.parentElement.closest('uc-file-uploader-regular, uc-modal')) {
+                        const text = node.textContent;
+                        const lowerText = text.toLowerCase().trim();
+                        if (textReplacements[lowerText]) {
+                            node.textContent = textReplacements[lowerText];
+                        }
+                    }
+                }
+            }
+            
+            // Apply on Modal Open
+            document.addEventListener('uc-modal-open', () => {
+                setTimeout(() => {
+                    capitalizeUploadcareText();
+                    // Force Dark Background on Modal Footer
+                    const footer = document.querySelector('.uc-upload-list__footer');
+                    if (footer) {
+                        footer.style.backgroundColor = '#0D0D0D';
+                    }
+                }, 200);
+            });
+            
+            // Apply to Button Text
+            setTimeout(() => {
+                capitalizeUploadcareText();
+            }, 100);
+            
+            // Listen for Upload Success
+            fileUploader.addEventListener('uc-upload-success', (event) => {
+                console.log('Files uploaded successfully:', event.detail);
+            });
+            
+            // Listen for File Removal
+            fileUploader.addEventListener('uc-file-removed', (event) => {
+                console.log('File removed:', event.detail);
+            });
         });
 
         // Support Email Handler
