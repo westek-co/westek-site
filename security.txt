@@ -1,0 +1,5 @@
+Contact: mailto:admin@westek.co
+Contact: https://westek.co/contact
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://westek.co/.well-known/security.txt

@@ -1,0 +1,20 @@
+/* COMPANY */
+Name: WES TEK
+Developer: Wesley Synnott
+Website: https://westek.co
+Email: admin@westek.co
+
+/* SITE */
+Site: https://westek.co
+Last Update: 2025/06/08
+Language: English
+Standards: HTML5, CSS3, JavaScript
+
+/* THANKS */
+Hosting: GitHub Pages
+Icons: Iconify
+Forms: Formspark
+File Upload: Uploadcare
+Security: Botpoison
+Analytics: Rybbit
+Webhooks: Pipedream
