@@ -42,8 +42,8 @@
         default-src 'self';
         script-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://ucarecdn.com https://submit-form.com https://app.rybbit.io 'unsafe-inline';
         style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';
-        img-src 'self' data: https:;
-        connect-src 'self' https://submit-form.com https://api.botpoison.com https://app.rybbit.io;
+        img-src 'self' data: https: blob:;
+        connect-src 'self' https://submit-form.com https://api.botpoison.com https://app.rybbit.io https://upload.uploadcare.com;
         frame-ancestors 'none';
     ">
     
@@ -347,7 +347,7 @@
 
         .developer-info {
             flex: 2;
-            max-width: 600px;
+            max-width: 400px;
             min-width: 300px;
         }
 
@@ -636,7 +636,7 @@
         .news-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.6)), url('assets/images/news/xcode.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.6)), url('assets/images/xcode.jpg') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1181,24 +1181,19 @@
         }
     </style>
 
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://unpkg.com/@botpoison/browser" as="script">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js" as="script" crossorigin="anonymous">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css" as="style">
-
     <!-- Botpoison Script -->
     <script src="https://unpkg.com/@botpoison/browser" integrity="sha384-zphvm0Yde3Sf+u7RmUEzW77Em/ZeXljT77XMF3SGSJDAoiTCN9vdSk2PeItXgQHZ" crossorigin="anonymous"></script>
+
+    <!-- Disable Rybbit Experimental Web Vitals -->
+    <script>window.__rybbitWebVitalsLoaded = true;</script>
 
     <!-- Rybbit Analytics Script -->
     <script src="https://app.rybbit.io/api/script.js" data-site-id="963" async defer></script>
 
-    <!-- Uploadcare Script -->
-    <script type="module">
-        import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';
-        UC.defineComponents(UC);
-    </script>
+    <!-- Uploadcare Module -->
+    <script type="module">import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';UC.defineComponents(UC);</script>
 
-    <!-- Uploadcare File Uploader v1 CSS -->
+    <!-- Uploadcare File Uploader CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css">
 
 </head>
@@ -1220,7 +1215,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <video class="video-background" autoplay muted loop playsinline>
-            <source src="placeholder-video.mp4" type="video/mp4">
+            <source src="westek.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="hero-overlay"></div>
@@ -1245,7 +1240,7 @@
             </div>
             <div class="about-content">
                 <div class="developer-photo">
-                    <img src="assets/images/about/wesley-synnott.png" alt="Wesley Synnott - iOS Developer">
+                    <img src="assets/images/wesley-synnott.png" alt="Wesley Synnott - iOS Developer">
                 </div>
                 <div class="developer-info">
                     <h3>Wesley Synnott</h3>
@@ -1278,10 +1273,10 @@
                     <div class="screen-container">
                         <div class="app-slides" id="appSlides">
                             <div class="app-slide">
-                                <img src="assets/images/apps/community-calendar.png" alt="The Wastelander">
+                                <img src="assets/images/community-calendar.png" alt="The Wastelander">
                             </div>
                             <div class="app-slide">
-                                <img src="assets/images/apps/community-calendar.png" alt="GTA Gateway">
+                                <img src="assets/images/community-calendar.png" alt="GTA Gateway">
                             </div>
                         </div>
                         <!-- Home Indicator -->
@@ -1544,6 +1539,7 @@
                 <!-- Hidden Fields for Additional Context -->
                 <input type="hidden" name="_subject" value="New Contact Form Submission from WES TEK">
                 <input type="hidden" name="_website" value="westek.com">
+                <input type="hidden" name="appName"   value="WES TEK">
                 
                 <button type="submit" id="submitButton" class="submit-button" style="display: none;">
                     <span id="buttonText">Send Message</span>
@@ -2078,5 +2074,76 @@
             updateActiveNav();
         });
     </script>
+
+    <!-- Web Vitals Script with Rybbit Integration and Error Handling -->
+    <script type="module">
+        try {
+            const {onCLS, onFID, onLCP} = await import('https://unpkg.com/web-vitals@3/dist/web-vitals.attribution.js');
+            
+            function sendToAnalytics({name, value, delta, id}) {
+                // Ensure Rybbit is Loaded before Sending
+                const sendMetric = () => {
+                    if (window.rybbit?.event) {
+                        window.rybbit.event(name, {
+                            value: Math.round(name === 'CLS' ? value * 1000 : value),
+                            delta: Math.round(name === 'CLS' ? delta * 1000 : delta),
+                            id: id,
+                            category: 'Web Vitals',
+                            metric_type: 'performance'
+                        });
+                        console.log(`[Web Vitals] ${name} sent to Rybbit:`, value);
+                    } else {
+                        // Retry if Rybbit isn't Ready Yet
+                        setTimeout(sendMetric, 500);
+                    }
+                };
+                
+                sendMetric();
+            }
+            
+            // Register all Web Vitals Metrics
+            onCLS(sendToAnalytics);
+            onFID(sendToAnalytics);
+            onLCP(sendToAnalytics);
+            
+            console.log('[Web Vitals] Successfully initialized with Rybbit integration');
+        } catch (error) {
+            // Handle Content Blocker Gracefully
+            console.log('[Web Vitals] Blocked by content blocker - attempting fallback');
+            
+            // Fallback: Try Loading from an Alternative CDN
+            try {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/web-vitals@3/dist/web-vitals.attribution.umd.js';
+                script.onload = () => {
+                    if (window.webVitals) {
+                        const {onCLS, onFID, onLCP} = window.webVitals;
+                        
+                        function sendToAnalytics({name, value, delta, id}) {
+                            if (window.rybbit?.event) {
+                                window.rybbit.event(name, {
+                                    value: Math.round(name === 'CLS' ? value * 1000 : value),
+                                    delta: Math.round(name === 'CLS' ? delta * 1000 : delta),
+                                    id: id,
+                                    category: 'Web Vitals',
+                                    metric_type: 'performance'
+                                });
+                            }
+                        }
+                        
+                        onCLS(sendToAnalytics);
+                        onFID(sendToAnalytics);
+                        onLCP(sendToAnalytics);
+                        
+                        console.log('[Web Vitals] Loaded via fallback CDN');
+                    }
+                };
+                document.head.appendChild(script);
+            } catch (fallbackError) {
+                console.log('[Web Vitals] Fallback also blocked');
+            }
+        }
+    </script>
+
 </body>
 </html>
