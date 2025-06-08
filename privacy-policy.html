@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wes Tek | Privacy Policy</title>
+    <title>WES TEK | Privacy Policy</title>
+    <meta name="description" content="Privacy Policy for WES TEK. Learn how we protect your data and respect your privacy rights.">
     <style>
         /* ==================== RESET & BASE STYLES ==================== */
         * {
@@ -35,6 +36,10 @@
             color: #66FFFF;
         }
 
+        strong {
+            color: #FFFFFF;
+        }
+
         /* ==================== LAYOUT UTILITIES ==================== */
         .container {
             max-width: 1200px;
@@ -49,6 +54,7 @@
             width: 100%;
             background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
@@ -71,6 +77,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            white-space: nowrap;
         }
 
         .logo:hover {
@@ -120,146 +127,288 @@
             min-height: calc(100vh - 200px);
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
         .page-header {
             text-align: center;
             margin-bottom: 3rem;
-            padding: 2rem 0;
-            background: #1A1A1A;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.1);
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #1A1A1A 0%, #0D0D0D 100%);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #FFFFFF;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
         }
 
         .page-header .subtitle {
             color: #B8B8B8;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents */
+        .toc-container {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .table-of-contents {
+            background: #1A1A1A;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .table-of-contents h2 {
+            font-size: 1.5rem;
+            color: #00FFFF;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: #B8B8B8;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        .toc-list a:hover {
+            color: #00FFFF;
+            background: rgba(0, 255, 255, 0.05);
+            border-color: rgba(0, 255, 255, 0.2);
+        }
+
+        /* Policy Content Container */
+        .policy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .policy-content {
             background: #1A1A1A;
             border-radius: 10px;
             padding: 3rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 255, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
             border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .policy-section {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .policy-section:last-child {
+            margin-bottom: 0;
         }
 
         .policy-section h2 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #00FFFF;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid rgba(0, 255, 255, 0.2);
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .policy-section h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #FFFFFF;
-            margin-bottom: 0.8rem;
-            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
         }
 
         .policy-section p {
             margin-bottom: 1rem;
-            text-align: justify;
+            text-align: left;
             color: #B8B8B8;
+            line-height: 1.8;
         }
 
         .policy-section ul {
             margin-bottom: 1rem;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
         }
 
         .policy-section li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             color: #B8B8B8;
+            line-height: 1.8;
         }
 
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #00FFFF;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0.5rem;
+            color: #FFFFFF;
+        }
+
+        .highlight-box:last-child p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Service Provider Cards */
+        .service-providers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .provider-card {
+            background: #2D2D2D;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .provider-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-color: #00FFFF;
+        }
+
+        .provider-card h4 {
+            color: #00FFFF;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .provider-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Rights Section */
+        .rights-section {
+            background: #2D2D2D;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .rights-section h4 {
+            color: #00FFFF;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .rights-section ul {
+            list-style-position: inside;
+        }
+
+        /* Contact Info */
         .contact-info {
             background: rgba(0, 255, 255, 0.1);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 8px;
-            border-left: 4px solid #00FFFF;
-            margin-top: 1rem;
             border: 1px solid rgba(0, 255, 255, 0.2);
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-info h3 {
+            color: #00FFFF;
+            margin-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            color: #FFFFFF;
         }
 
         .contact-info strong {
             color: #00FFFF;
         }
 
-        .contact-info p {
-            color: #B8B8B8;
-        }
-
+        /* Effective Dates */
         .effective-dates {
             background: #2D2D2D;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem 2rem;
             border-radius: 8px;
             margin-bottom: 2rem;
             border: 1px solid rgba(0, 255, 255, 0.1);
+            text-align: center;
         }
 
         .effective-dates p {
             margin-bottom: 0.5rem;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #B8B8B8;
+        }
+
+        .effective-dates p:last-child {
+            margin-bottom: 0;
         }
 
         .effective-dates strong {
             color: #00FFFF;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: #00FFFF;
-            text-decoration: none;
-            font-weight: 500;
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #00FFFF;
+            color: #0D0D0D;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
             transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 20px;
-            background: rgba(0, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
         }
 
-        .back-link:hover {
-            color: #FFFFFF;
-            background: rgba(0, 255, 255, 0.1);
-            border-color: #00FFFF;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        .back-to-top:hover {
+            background: #FFFFFF;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
         }
 
-        .back-link::before {
-            content: '← ';
-            margin-right: 0.5rem;
-        }
-
-        .compliance-note {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-            font-size: 0.9rem;
-            color: #B8B8B8;
-            font-style: italic;
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* ==================== FOOTER ==================== */
@@ -306,35 +455,67 @@
 
         /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
             .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
+                gap: 0.8rem;
+                font-size: 0.85rem;
             }
 
             .page-header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .policy-content {
                 padding: 2rem;
             }
 
-            .container {
+            .container,
+            .policy-container,
+            .toc-container {
                 padding: 0 1rem;
             }
 
             .main-content {
                 margin-top: 80px;
             }
+
+            .service-providers {
+                grid-template-columns: 1fr;
+            }
+
+            .back-to-top {
+                right: 1rem;
+                bottom: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-links a {
+                padding: 0.2rem;
+            }
+
             .policy-content {
                 padding: 1.5rem;
             }
 
             .page-header {
-                padding: 1.5rem 1rem;
+                padding: 2rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -343,7 +524,7 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">Wes Tek</a>
+            <a href="index.html" class="logo">WES TEK</a>
             <ul class="nav-links">
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
@@ -356,14 +537,35 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
-            <a href="index.html" class="back-link">Back to Home</a>
-            
-            <div class="page-header">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
                 <h1>Privacy Policy</h1>
-                <p class="subtitle">How We Protect and Handle Your Information</p>
+                <p class="subtitle">WES TEK is committed to protecting your privacy. This policy explains how we handle your information with transparency and respect for your rights.</p>
             </div>
+        </div>
 
+        <!-- Table of Contents -->
+        <div class="toc-container">
+            <div class="table-of-contents">
+                <h2>Table of Contents</h2>
+                <ul class="toc-list">
+                    <li><a href="#information-we-collect">Information We Collect</a></li>
+                    <li><a href="#how-we-use">How We Use Information</a></li>
+                    <li><a href="#cookies">Cookies & Tracking</a></li>
+                    <li><a href="#third-party">Third-Party Services</a></li>
+                    <li><a href="#data-retention">Data Retention</a></li>
+                    <li><a href="#international-transfers">International Transfers</a></li>
+                    <li><a href="#data-security">Data Security</a></li>
+                    <li><a href="#your-rights">Your Privacy Rights</a></li>
+                    <li><a href="#childrens-privacy">Children's Privacy</a></li>
+                    <li><a href="#contact">Contact Information</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Policy Content -->
+        <div class="policy-container">
             <div class="policy-content">
                 <div class="effective-dates">
                     <p><strong>Effective Date:</strong> June 4, 2025</p>
@@ -372,19 +574,22 @@
 
                 <div class="policy-section">
                     <h2>Overview</h2>
-                    <p>Wes Tek ("we," "us," or "our") operates this website to provide information about our development services. This Privacy Policy explains how we collect, use, and protect information when you visit our website.</p>
+                    <p>WES TEK operates <strong>westek.co</strong> and its related site <strong>The Wastelander</strong> (wastelander.app) as informational websites designed for English-speaking users in Canada and the United States. Our websites do not require user accounts or logins.</p>
+                    <p>This policy explains what information we collect, how we use it, and your rights under Canadian law (PIPEDA) and California law (CPRA). We are not targeting EU/UK users, so GDPR/EEA rules do not apply. This policy is written in clear, straightforward language consistent with privacy principles.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Key Points:</strong></p>
+                        <p>• We collect only necessary information to run our websites and respond to inquiries.</p>
+                        <p>• We do not sell or share your personal information for marketing purposes.</p>
+                        <p>• You have rights to access, correct, and delete your personal information.</p>
+                    </div>
                 </div>
 
-                <div class="policy-section">
+                <div class="policy-section" id="information-we-collect">
                     <h2>Information We Collect</h2>
                     
-                    <h3>Information You Provide</h3>
-                    <ul>
-                        <li>Contact details submitted through our contact form (name, email address, message content).</li>
-                        <li>Information included in emails sent to our support address.</li>
-                    </ul>
-
                     <h3>Automatically Collected Information</h3>
+                    <p>When you visit our websites, we automatically log technical data to secure and improve our sites:</p>
                     <ul>
                         <li>IP address and general location information.</li>
                         <li>Browser type and version.</li>
@@ -393,149 +598,219 @@
                         <li>Referring website addresses.</li>
                         <li>Device information (mobile, desktop, tablet).</li>
                     </ul>
-
-                    <h3>Cookies and Tracking Technologies</h3>
-                    <p>We may use cookies and similar technologies to:</p>
+                    
+                    <h3>Analytics Data</h3>
+                    <p>We use <strong>Rybbit</strong> for analytics, which records anonymous visit data including:</p>
                     <ul>
-                        <li>Improve website functionality and user experience.</li>
-                        <li>Analyze website traffic and usage patterns.</li>
-                        <li>Remember your preferences for future visits.</li>
+                        <li>Page URLs visited.</li>
+                        <li>Session duration.</li>
+                        <li>Referrer information.</li>
+                        <li>Device and browser type.</li>
+                        <li>Visitor's country or region.</li>
                     </ul>
-                    <p>You can disable cookies through your browser settings, though this may affect website functionality.</p>
+                    <p><strong>Important:</strong> Rybbit does not store your IP address or use cookies, protecting your privacy.</p>
+                    
+                    <h3>Information You Provide</h3>
+                    <p>If you submit our contact form, you voluntarily provide:</p>
+                    <ul>
+                        <li>Your name and email address.</li>
+                        <li>Inquiry type and message content.</li>
+                        <li>Any files you choose to attach (handled by Uploadcare).</li>
+                        <li>App version, device model, and iOS version (for bug reports).</li>
+                    </ul>
+                    
+                    <h3>Bot Protection Data</h3>
+                    <p>We use <strong>Botpoison</strong> for spam protection, which collects:</p>
+                    <ul>
+                        <li>IP address.</li>
+                        <li>Browser and operating system information.</li>
+                        <li>Form activity patterns.</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <p><strong>What We Don't Collect:</strong> We do not request or collect sensitive information such as government IDs, financial data, health information, or special category data.</p>
+                    </div>
                 </div>
 
-                <div class="policy-section">
+                <div class="policy-section" id="how-we-use">
                     <h2>How We Use Your Information</h2>
-                    <p>We use collected information to:</p>
+                    <p>We use your information only for legitimate purposes related to our services:</p>
+                    
                     <ul>
-                        <li>Respond to inquiries submitted through our contact form or email.</li>
-                        <li>Improve our website and services.</li>
-                        <li>Analyze website performance and user behaviour.</li>
-                        <li>Ensure website security and prevent abuse.</li>
+                        <li><strong>Contact Form Data:</strong> To respond to your inquiries, feedback, or support requests.</li>
+                        <li><strong>Visit Data:</strong> To analyze traffic patterns and improve our websites.</li>
+                        <li><strong>Technical Data:</strong> For security purposes, including preventing attacks and fraud.</li>
+                        <li><strong>Bot Protection Data:</strong> Solely to prevent spam and automated abuse.</li>
                     </ul>
+                    
+                    <p><strong>We do not:</strong></p>
+                    <ul>
+                        <li>Use personal data for marketing purposes.</li>
+                        <li>Share or sell your information for advertising.</li>
+                        <li>Use automated decision-making or profiling.</li>
+                    </ul>
+                    
+                    <p>All personal information is used solely to provide and secure our services and communicate with you. This limited collection aligns with the purposes explained when the data was collected.</p>
                 </div>
 
-                <div class="policy-section">
-                    <h2>Information Sharing and Disclosure</h2>
-                    <p>We do not sell, trade, or rent your personal information to third parties. We may share information only in these circumstances:</p>
+                <div class="policy-section" id="cookies">
+                    <h2>Cookies and Tracking Technologies</h2>
+                    <p>We use cookies and similar technologies to support site functionality and analytics. A cookie is a small text file stored by your browser that helps remember preferences and improve your experience.</p>
+                    
+                    <h3>Types of Cookies We Use</h3>
                     <ul>
-                        <li><strong>Service Providers:</strong> With trusted third-party services that help us operate our website (hosting providers, analytics services).</li>
-                        <li><strong>Legal Requirements:</strong> When required by law, regulation, or legal process.</li>
-                        <li><strong>Business Protection:</strong> To protect our rights, property, or safety, or that of our users.</li>
+                        <li><strong>Functional Cookies:</strong> Remember form fields or site settings to improve your experience.</li>
+                        <li><strong>Security Cookies:</strong> Help protect against fraud and maintain site security.</li>
                     </ul>
+                    
+                    <h3>Managing Cookies</h3>
+                    <p>You can manage or delete cookies through your browser settings. Please note that disabling cookies may affect website functionality.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Privacy-First Analytics:</strong> Our analytics provider Rybbit does not use cookies at all – it tracks visits in a cookieless way to protect your privacy.</p>
+                    </div>
                 </div>
 
-                <div class="policy-section">
+                <div class="policy-section" id="third-party">
+                    <h2>Third-Party Service Providers</h2>
+                    <p>We use the following trusted third-party services to operate our websites. Each acts as a data processor on our behalf:</p>
+                    
+                    <div class="service-providers">
+                        <div class="provider-card">
+                            <h4>Formspark</h4>
+                            <p><strong>Purpose:</strong> Form Submissions</p>
+                            <p>Processes contact forms and collects only the fields you enter. Formspark explicitly states it does not sell your data.</p>
+                        </div>
+                        
+                        <div class="provider-card">
+                            <h4>Botpoison</h4>
+                            <p><strong>Purpose:</strong> Bot Brotection</p>
+                            <p>Prevents spam and automated abuse by analyzing form submissions. Botpoison will never sell or rent your data.</p>
+                        </div>
+                        
+                        <div class="provider-card">
+                            <h4>Uploadcare</h4>
+                            <p><strong>Purpose:</strong> File Uploads</p>
+                            <p>Manages file attachments you submit. Uploadcare does not sell or rent your personal data.</p>
+                        </div>
+                        
+                        <div class="provider-card">
+                            <h4>Rybbit</h4>
+                            <p><strong>Purpose:</strong> Analytics</p>
+                            <p>Provides site usage analytics with aggregated, non-identifying data. Does not collect personal information or sell data.</p>
+                        </div>
+                    </div>
+                    
+                    <p>All service providers process data solely to deliver their service to us. They have privacy policies confirming they use data only as instructed and do not sell personal information.</p>
+                </div>
+
+                <div class="policy-section" id="data-retention">
                     <h2>Data Retention</h2>
+                    <p>We keep personal data only as long as needed to fulfill the purposes described in this policy:</p>
+                    
                     <ul>
-                        <li><strong>Contact form and email inquiries:</strong> Retained for two years from last contact.</li>
-                        <li><strong>Website analytics data:</strong> Retained according to our analytics provider's retention policies.</li>
-                        <li><strong>Server logs:</strong> Retained for one year for security and performance purposes.</li>
+                        <li><strong>Contact Form Submissions:</strong> Retained to allow us to respond and follow up, then deleted when no longer needed.</li>
+                        <li><strong>Technical and Analytics Data:</strong> Stored only for the time required to maintain and improve the site, then purged.</li>
+                        <li><strong>Security Logs:</strong> Retained for up to one year for security and performance purposes.</li>
                     </ul>
+                    
+                    <p>In accordance with PIPEDA's retention principle, we do not keep personal information longer than necessary. When data is no longer needed, it is securely deleted or anonymized.</p>
                 </div>
 
-                <div class="policy-section">
-                    <h2>Your Rights (Ontario/Canada)</h2>
-                    <p>Under applicable Canadian privacy laws, you have the right to:</p>
-                    <ul>
-                        <li>Request access to personal information we hold about you.</li>
-                        <li>Request correction of inaccurate personal information.</li>
-                        <li>Request deletion of your personal information (subject to legal retention requirements).</li>
-                        <li>Withdraw consent where processing is based on consent.</li>
-                    </ul>
-                    <p>To exercise these rights, contact us at admin@westek.co.</p>
-                </div>
-
-                <div class="policy-section">
-                    <h2>Security Measures</h2>
-                    <p>We implement appropriate technical and organizational measures to protect your information against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.</p>
-                </div>
-
-                <div class="policy-section">
-                    <h2>Third-Party Services</h2>
-                    <p>Our website may use third-party services such as:</p>
-                    <ul>
-                        <li>Web Hosting Provider</li>
-                        <li>Analytics Services (e.g., Google Analytics)</li>
-                        <li>Content Delivery Networks</li>
-                    </ul>
-                    <p>These services have their own privacy policies governing how they handle data.</p>
-                </div>
-
-                <div class="policy-section">
+                <div class="policy-section" id="international-transfers">
                     <h2>International Data Transfers</h2>
-                    <p>Your information may be processed and stored on servers located outside Canada. We ensure appropriate safeguards are in place when transferring data internationally.</p>
+                    <p>Although our users are primarily in Canada and the U.S., some service providers may transfer data internationally:</p>
+                    
+                    <ul>
+                        <li><strong>Formspark and Botpoison:</strong> Operate servers in Europe (Ireland).</li>
+                        <li><strong>Uploadcare:</strong> U.S.-based company with global infrastructure.</li>
+                    </ul>
+                    
+                    <p>By using our forms, you consent to these transfers. We rely on our service providers' legal safeguards (such as standard contractual clauses) to protect your data. These transfers are necessary for providing the services described above.</p>
+                </div>
+
+                <div class="policy-section" id="data-security">
+                    <h2>Data Security</h2>
+                    <p>We take reasonable measures to protect personal information from unauthorized access or disclosure:</p>
+                    
+                    <ul>
+                        <li>All data is encrypted during transmission using SSL/TLS.</li>
+                        <li>Access to personal data is restricted to authorized personnel only.</li>
+                        <li>We use industry-standard security tools and practices.</li>
+                        <li>Regular security assessments help identify and address vulnerabilities.</li>
+                    </ul>
+                    
+                    <h3>Data Breach Response</h3>
+                    <p>In the unlikely event of a data breach involving your personal information:</p>
+                    <ul>
+                        <li>We will promptly notify affected users (typically by email within 7 business days).</li>
+                        <li>We will report the incident to authorities as required by law.</li>
+                        <li>We will take immediate steps to secure our systems and prevent future breaches.</li>
+                    </ul>
+                    
+                    <p>However, no system is perfectly secure. We encourage you to contact us if you have any security concerns.</p>
+                </div>
+
+                <div class="policy-section" id="your-rights">
+                    <h2>Your Privacy Rights</h2>
+                    <p>Under privacy laws, you have certain rights regarding your personal information:</p>
+                    
+                    <div class="rights-section">
+                        <h4>If you are a Canadian Resident (PIPEDA):</h4>
+                        <ul>
+                            <li>Access your personal information we hold.</li>
+                            <li>Correct inaccuracies in your data.</li>
+                            <li>Know how we use your information.</li>
+                            <li>Withdraw consent to processing (subject to legal exceptions).</li>
+                            <li>File a complaint with the Office of the Privacy Commissioner of Canada.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rights-section">
+                        <h4>If you are a California Resident (CPRA):</h4>
+                        <ul>
+                            <li>Request disclosure of categories and specific personal data we collect.</li>
+                            <li>Request deletion of your personal information.</li>
+                            <li>Correct inaccurate personal data.</li>
+                            <li>Opt-out of sale (though we do not sell personal data).</li>
+                            <li>Not be discriminated against for exercising privacy rights.</li>
+                        </ul>
+                    </div>
+                    
+                    <p>To exercise any of these rights, please contact us using the information below. We will verify your identity and respond within the legal timeframe.</p>
+                </div>
+
+                <div class="policy-section" id="childrens-privacy">
+                    <h2>Children's Privacy (COPPA)</h2>
+                    <p>Our websites are not directed at children under 13, and we do not knowingly collect information from anyone under 13 years of age.</p>
+                    <p>If we learn that we have inadvertently gathered a child's data, we will promptly delete it. Parents or guardians should not submit personal information for children under 13 through our sites.</p>
                 </div>
 
                 <div class="policy-section">
-                    <h2>Children's Privacy</h2>
-                    <p>Our website is not directed to individuals under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
+                    <h2>No Automated Decision-Making</h2>
+                    <p>We do not use personal data for automated decision-making or profiling. All decisions involving your personal information are made manually by our staff as needed (for example, responding to a support request).</p>
                 </div>
 
                 <div class="policy-section">
                     <h2>Changes to This Policy</h2>
-                    <p>We may update this Privacy Policy periodically. Changes will be posted on this page with an updated "Last Updated" date. Continued use of our website after changes constitutes acceptance of the updated policy.</p>
+                    <p>This privacy policy may be updated from time to time. We will post any revised policy on our websites and indicate the effective date at the top. We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+                </div>
+
+                <div class="policy-section" id="contact">
+                    <h2>Contact Information</h2>
+                    <p>For questions or concerns about this policy, or to exercise your privacy rights, you may contact us:</p>
+                    
+                    <div class="contact-info">
+                        <h3>WES TEK Privacy Office</h3>
+                        <p><strong>Privacy Officer:</strong> Wesley Synnott</p>
+                        <p><strong>Email:</strong> <a href="mailto:support@westek.co">support@westek.co</a> (primary contact for support)</p>
+                        <p><strong>Mail:</strong> WES TEK, 123 Main Street, Windsor, Ontario, N9A 1A1, Canada</p>
+                    </div>
+                    
+                    <p>We are committed to addressing your privacy concerns and will respond to all inquiries promptly.</p>
                 </div>
 
                 <div class="policy-section">
-                    <h2>Contact Information</h2>
-                    <p>For questions about this Privacy Policy or our privacy practices, contact us at:</p>
-                    <div class="contact-info">
-                        <p><strong>Email:</strong> admin@westek.co</p>
-                    </div>
+                    <h2>Legal Compliance</h2>
+                    <p>This privacy policy follows Canadian (PIPEDA) and U.S. (CPRA) privacy law guidance, and incorporates the privacy policies of our service providers (Formspark, Botpoison, Uploadcare, Rybbit) which confirm their data practices.</p>
                 </div>
-
-                <div class="compliance-note">
-                    <p>This Privacy Policy complies with applicable Canadian privacy legislation, including the Personal Information Protection and Electronic Documents Act (PIPEDA) and Ontario's privacy laws.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="mailto:admin@westek.co">Support</a>
-            </div>
-            <p>&copy; Wes Tek. 2025. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth Scrolling for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll Animations for Navigation
-        function handleScroll() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(13, 13, 13, 0.98)';
-                nav.style.padding = '0.5rem 0';
-            } else {
-                nav.style.background = 'rgba(13, 13, 13, 0.95)';
-                nav.style.padding = '1rem 0';
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll);
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            handleScroll();
-        });
-    </script>
-</body>
-</html>
