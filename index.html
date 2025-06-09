@@ -11,6 +11,11 @@
     <meta name="author" content="Wesley Synnott">
     <meta name="robots" content="index, follow">
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://westek.co/">
@@ -327,6 +332,7 @@
             gap: 4rem;
             flex-wrap: wrap;
             margin-top: 2rem;
+            justify-content: center;
         }
 
         .company-info {
@@ -336,8 +342,7 @@
         }
 
         .developer-photo {
-            flex: 1;
-            min-width: 250px;
+            flex: 0 0 250px;
             text-align: center;
         }
 
@@ -351,8 +356,8 @@
         }
 
         .developer-info {
-            flex: 2;
-            min-width: 300px;
+            flex: 1;
+            max-width: 600px;
         }
 
         .developer-info h3 {
@@ -698,6 +703,7 @@
             justify-content: center;
             gap: 2rem;
             margin-top: 2rem;
+            margin-bottom: 2rem;
             padding: 0;
         }
 
@@ -1228,8 +1234,8 @@
             <h1>WES TEK</h1>
             <h2>Innovative iOS App Development</h2>
             <div class="tagline-container">
-                <p class="tagline" data-text="The Wastelander"><a href="https://wastelander.app/" class="app-link">The Wastelander</a></p>
-                <p class="tagline" data-text="GTA Gateway"><a href="https://gta-gateway.app/" class="app-link">GTA Gateway</a></p>
+                <p class="tagline" data-text="The Wastelander" data-url="https://wastelander.app/"><a href="https://wastelander.app/" class="app-link">The Wastelander</a></p>
+                <p class="tagline" data-text="GTA Gateway" data-url="https://gta-gateway.app/"><a href="https://gta-gateway.app/" class="app-link">GTA Gateway</a></p>
             </div>
             <a href="#apps" class="cta-button">Explore Our Apps</a>
         </div>
@@ -1386,6 +1392,7 @@
                 class="contact-form" 
                 action="https://submit-form.com/ZUzdNuTfA" 
                 method="POST"
+                data-csrf-token=""
             >
                 <!-- Honeypot Field for Additional Spam Protection -->
                 <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
@@ -1564,6 +1571,25 @@
     </footer>
 
     <script>
+        // Rate Limiting for Form Submissions
+        const rateLimiter = {
+            submissions: [],
+            maxSubmissions: 3,
+            windowMs: 60000, // 1 minute
+            
+            canSubmit() {
+                const now = Date.now();
+                this.submissions = this.submissions.filter(time => now - time < this.windowMs);
+                
+                if (this.submissions.length >= this.maxSubmissions) {
+                    return false;
+                }
+                
+                this.submissions.push(now);
+                return true;
+            }
+        };
+
         // Dynamic Tagline Rotation
         let taglineRotationEnabled = true;
         let currentTaglineIndex = 0;
@@ -1693,6 +1719,16 @@
             const formTypeSelect = document.getElementById('formType');
             const dynamicFields = document.getElementById('dynamicFields');
             
+            // Generate CSRF Token
+            function generateCSRFToken() {
+                return Array.from(crypto.getRandomValues(new Uint8Array(32)))
+                    .map(b => b.toString(16).padStart(2, '0'))
+                    .join('');
+            }
+            
+            // Set CSRF Token
+            form.dataset.csrfToken = generateCSRFToken();
+            
             // Form Field Configurations
             const formConfigs = {
                 bug: {
@@ -1764,7 +1800,7 @@
                 }
             });
 
-            // Sanitize Input Function
+            // Enhanced Sanitize Input Function
             function sanitizeInput(input) {
                 // Remove Any HTML Tags
                 input = input.replace(/<[^>]*>/g, '');
@@ -1775,6 +1811,9 @@
                             .replace(/"/g, '&quot;')
                             .replace(/'/g, '&#x27;')
                             .replace(/\//g, '&#x2F;');
+                // Remove any script tags or javascript: protocols
+                input = input.replace(/javascript:/gi, '');
+                input = input.replace(/on\w+\s*=/gi, '');
                 return input.trim();
             }
 
@@ -1854,6 +1893,12 @@
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
+                // Check Rate Limiting
+                if (!rateLimiter.canSubmit()) {
+                    showStatus('error', '❌ Too many submissions. Please wait a moment before trying again.');
+                    return;
+                }
+                
                 // Validate Form First
                 if (!validateForm()) {
                     return;
@@ -1886,6 +1931,9 @@
                     
                     // Add Botpoison Solution
                     jsonData._botpoison = solution;
+                    
+                    // Add CSRF Token
+                    jsonData._csrf = form.dataset.csrfToken;
                     
                     // Submit to Formspark
                     const response = await fetch(form.action, {
